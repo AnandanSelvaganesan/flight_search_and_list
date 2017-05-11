@@ -1,0 +1,4617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Flight Search and List</title>
+<!-- Bootstrap -->
+<link href="web/styles/bootstrap3/css/bootstrap.css" rel="stylesheet" />
+<link href="web/styles/bootstrap3/css/non-responsive.css" rel="stylesheet" />
+
+<!-- Jquery UI Css -->
+<link rel="stylesheet" href="web/styles/jquery-ui.css" rel="stylesheet" />
+<link rel="stylesheet" href="web/styles/main.css" />
+<link rel="stylesheet" href="web/styles/default-theme.css" />
+<link href="web/styles/font-awesome-4.3.0/css/font-awesome.css" rel="stylesheet" />
+
+<script src="web/scripts/1.11.2.jquery.min.js"></script>
+<script src="web/scripts/jquery-ui.js"></script>
+
+<script src="web/styles/bootstrap3/js/bootstrap.js" type="text/javascript"></script>
+
+
+	<script src="web/scripts/jquery.json-2.3.min.js"></script>
+	<script type="text/javascript" src="web/scripts/json.js"></script>
+	<!--<script type="text/javascript" src="web/scripts/sbt.js?v=<%=applicationVersion%>"></script>-->
+	<script type="text/javascript"
+			src="web/scripts/core.js?v=<%=applicationVersion%>"></script>
+	<script type="text/javascript"
+			src="web/scripts/airutils.js?v=<%=applicationVersion%>"></script>
+	<script type="text/javascript" src="web/scripts/air_section_renderer.js?v=<%=applicationVersion%>"></script>
+	<script type="text/javascript"
+			src="web/scripts/air_selection_renderer.js?v=<%=applicationVersion%>"></script>
+	<script type="text/javascript"
+			src="web/scripts/core/date-formatter.js?v=<%=applicationVersion%>"></script>
+	<script src="web/scripts/GBT.js"></script>
+	<script src="web/scripts/book_dialog.js?v=<%=applicationVersion%>"></script>
+	<script type="text/javascript"
+			src="web/scripts/book_dialog_validate.js"></script>
+	<!--<script type="text/javascript"
+			src="web/scripts/CKEditor.js?v=<%=applicationVersion%>"></script>-->
+	<!--<script type="text/javascript"
+			src="web/scripts/mail.js?v=<%=applicationVersion%>"></script>-->
+	<link rel="stylesheet" href="web/styles/datepickerStyle/classic.css" />
+	<link rel="stylesheet"
+		  href="web/styles/datepickerStyle/classic.date.css" />
+	<link rel="stylesheet"
+		  href="web/styles/datepickerStyle/classic.time.css" />
+	<script type="text/javascript" src="web/scripts/datepicker/picker.js"></script>
+	<script type="text/javascript"
+			src="web/scripts/datepicker/picker.date.js"></script>
+	<script type="text/javascript"
+			src="web/scripts/datepicker/picker.time.js"></script>
+	<link rel="stylesheet" type="text/css"
+		  href="web/styles/jquery.countdown.css">
+	<script type="text/javascript" src="web/scripts/jquery.plugin.js"></script>
+	<script src="web/scripts/jquery.countdown.js"></script>
+	<script type="text/javascript"
+			src="web/scripts/currency_dropdown.js?v=<%=applicationVersion%>"></script>
+	<script type="text/javascript"
+			src="web/scripts/currencyUtils.js?v=<%=applicationVersion%>"></script>
+
+
+<!--	<%
+	String requestId = (String) request.getAttribute("requestId");
+	String status = (String) request.getAttribute("status");
+	String multicityObj = (String) request.getAttribute("multicityObj");
+	SessionDetails objSesDet=(SessionDetails)session.getAttribute(SessionConstants.SESSION_DETAILS);
+	String corpId = objSesDet.CORP_ID;
+
+	%>-->
+
+
+	<style type="text/css">
+.ui-slider-handle {
+    background-color: #337ab7 !important;
+    border-radius: 50% !important;
+}
+.td-v-middle>tbody>tr>td{
+    vertical-align: middle;
+}
+.dtable>thead>tr>td, .dtable>tbody>tr>td, .dtable>tfoot>tr>td {
+	padding: 5px !important;
+}
+.table-primary-hover > tbody > tr:hover {
+    background-color: #d9edf7;
+}
+
+#searchForm {
+   position: relative;
+   margin-top: -35%;
+}
+.ui-menu .ui-menu-item a, .ui-menu .ui-menu-item a.ui-state-hover,
+	.ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;
+	margin: -1px;
+	text-align: left;
+	font-size: 12px;
+    border: 1px solid transparent;
+	padding: 6px;
+}
+</style>
+
+	<script type="text/javascript">
+
+	var nextPriceSortOrder = "ASC";
+	var nextAirLineSortOrder = "ASC";
+	var nextDepartSortOrder = "ASC";
+	var nextArriveSortOrder = "ASC";
+	var nextDurationSortOrder = "ASC";
+	var nextRatingSortOrder = "ASC";
+	var searchCounter = 0;
+	var _mode = "SBT";
+	var tripType = "";
+	var tripCode = "";
+	var globalEntities = new Array();
+	var globalConfig = "";
+	var entities = new Array();
+	var globalTimeout = null;
+	var typedAirLineNameFilterVal = "XX";
+	var maxStops=4;
+	var selectedStops = [];
+	var maxVal = 0;
+	var minVal = 0;
+	var segmentObjects = [];
+	var _curr_page_limit;
+	var _new_page_limit;
+	var _corpId = "<%=corpId%>";
+	var _avgTicketPrice = {};
+	var _searchedAvgTicketPrice;
+
+	$(document).ready(function(){
+
+		$('#scrollRight').show();
+	    $('[data-toggle="popover"]').popover();
+
+
+	    $('#filterAirLineName').keyup(function(){
+			  if(globalTimeout != null) clearTimeout(globalTimeout);
+			  globalTimeout =setTimeout(filterByName,1000);
+		});
+
+
+	    $( "#slider-range" ).slider({
+		      range: true,
+		      min: minVal,
+		      max: maxVal,
+		      values: [ minVal, maxVal ],
+		      animate:"slow",
+		      slide: function( event, ui ) {
+		        $( "#amount" ).val( ui.values[ 0 ] + " INR - " + ui.values[ 1 ]+" INR" );
+		      }
+		    });
+		$( "#amount" ).val( " " + $( "#slider-range" ).slider( "values", 0 ) + " INR - " + $( "#slider-range" ).slider( "values", 1 )+" INR" );
+
+		$( "#slider-range" ).on( "slidechange", function( event, ui ) {
+			refreshRenderEntity();
+		});
+
+
+	});
+
+	$(document).on('click', function (e) {
+
+		//if($("#formDropdown").hasClass('open'))
+			//$("#formDropdown").removeClass('open');
+
+		/*  $('[data-toggle="popover"],[data-original-title]').each(function () {
+	        //the 'is' for buttons that trigger popups
+	        //the 'has' for icons within a button that triggers a popup
+	        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+	            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+	        }
+
+	    });*/
+	});
+
+
+	$(document).ready(function () {
+	   var location = window.location;
+	   var found = false;
+	   $("#tab-container a").each(function(){
+	      var href = $(this).attr("href");
+	      if(href==location){
+	         $(this).parent().addClass("selected");
+	         found = true;
+	      }
+	   });
+	   if(!found){
+	      $("#tab-container li:first").addClass("selected");
+	   }
+
+	   buildEmptySearchBox();
+
+	   $('#opt_oneway').ready(function(){
+	        $('.roundtrip_enable').prop('disabled',true);
+	    	document.getElementById('search-table').style.display = "block";
+       		document.getElementById('search-table-2').style.display = "block";
+       		document.getElementById('search-table-3').innerHTML = " ";
+       		document.getElementById('search-table-4').innerHTML = " ";
+
+       		$('#opt_oneway').click(function(){
+    	        $('.roundtrip_enable').prop('disabled',true);
+    	    	document.getElementById('search-table').style.display = "block";
+           		document.getElementById('search-table-2').style.display = "block";
+           		document.getElementById('search-table-3').innerHTML = " ";
+           		document.getElementById('search-table-4').innerHTML = " ";
+           		document.getElementById('search-addcity-table').innerHTML = " ";
+
+       		});
+	        $('#opt_roundtrip').click(function(){
+	            $('.roundtrip_enable').prop('disabled',false);
+	        	document.getElementById('search-table').style.display = "block";
+	        	document.getElementById('search-table-2').style.display = "block";
+	         	document.getElementById('search-table-3').innerHTML = " ";
+	        	document.getElementById('search-table-4').innerHTML = " ";
+	        	document.getElementById('search-addcity-table').innerHTML = " ";
+
+	        });
+
+	        $('#opt_multicity').click(function(){
+	        	document.getElementById('search-table').style.display = "none";
+	        	document.getElementById('search-table-2').style.display = "none";
+	         	document.getElementById('search-table-3').innerHTML = " ";
+	        	document.getElementById('search-table-4').innerHTML = " ";
+	         	document.getElementById('search-addcity-table').innerHTML = " ";
+	        	if(document.getElementById('opt_multicity').checked == true)
+	    		{
+	        		buildEmptySearchBox_multicity();
+	    		}
+
+
+
+	        });
+	    });
+
+	});
+
+function showAirLineWise(e) {
+
+	var segmentId = $(e).attr('parent-id');
+
+	$(e.parentNode.parentNode.parentNode).find('a').removeClass('active');
+	$(e.parentNode.parentNode.parentNode).find('i').addClass('hidden');
+
+	$(e).addClass('active');
+	$(e).find('i').removeClass('hidden');
+
+	sortByObjects("airline", nextAirLineSortOrder,segmentId);
+	if(nextAirLineSortOrder=="ASC"){
+		nextAirLineSortOrder = "DESC";
+	}else{
+		nextAirLineSortOrder = "ASC";
+	}
+}
+function showDepartWise(e) {
+
+	var segmentId = $(e).attr('parent-id');
+
+	$(e.parentNode.parentNode.parentNode).find('a').removeClass('active');
+	$(e.parentNode.parentNode.parentNode).find('i').addClass('hidden');
+
+	$(e).addClass('active');
+	$(e).find('i').removeClass('hidden');
+
+	sortByObjects("depart", nextDepartSortOrder,segmentId);
+	if(nextDepartSortOrder=="ASC"){
+		nextDepartSortOrder = "DESC";
+	}else{
+		nextDepartSortOrder = "ASC";
+	}
+}
+function showDurationWise(e) {
+
+	var segmentId = $(e).attr('parent-id');
+
+	$(e.parentNode.parentNode.parentNode).find('a').removeClass('active');
+	$(e.parentNode.parentNode.parentNode).find('i').addClass('hidden');
+
+	$(e).addClass('active');
+	$(e).find('i').removeClass('hidden');
+
+	sortByObjects("duration", nextDurationSortOrder,segmentId);
+	if(nextDurationSortOrder=="ASC"){
+		nextDurationSortOrder = "DESC";
+	}else{
+		nextDurationSortOrder = "ASC";
+	}
+}
+function showArriveWise(e) {
+
+	var segmentId = $(e).attr('parent-id');
+
+	$(e.parentNode.parentNode.parentNode).find('a').removeClass('active');
+	$(e.parentNode.parentNode.parentNode).find('i').addClass('hidden');
+
+	$(e).addClass('active');
+	$(e).find('i').removeClass('hidden');
+
+	sortByObjects("arrive", nextArriveSortOrder,segmentId);
+	if(nextArriveSortOrder=="ASC"){
+		nextArriveSortOrder = "DESC";
+	}else{
+		nextArriveSortOrder = "ASC";
+	}
+}
+function showPriceWise(e) {
+
+	var segmentId = $(e).attr('parent-id');
+
+	$(e.parentNode.parentNode.parentNode).find('a').removeClass('active');
+	$(e.parentNode.parentNode.parentNode).find('i').addClass('hidden');
+
+	$(e).addClass('active');
+	$(e).find('i').removeClass('hidden');
+
+	sortByObjects("price", nextPriceSortOrder,segmentId);
+	if(nextPriceSortOrder=="ASC"){
+		nextPriceSortOrder = "DESC";
+	}else{
+		nextPriceSortOrder = "ASC";
+	}
+}
+function sortByObjects(sortBy, order,segmentId){
+
+	var sortedListCR = [];
+
+	if(sortBy==="price"){
+		if(order==="ASC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+			      var contentA =parseInt( $(a).attr('pr'));
+			      var contentB =parseInt( $(b).attr('pr'));
+			      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+
+		}else if(order==="DESC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+			      var contentA =parseInt( $(a).attr('pr'));
+			      var contentB =parseInt( $(b).attr('pr'));
+			      return (contentB < contentA) ? -1 : (contentB > contentA) ? 1 : 0;
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+		}
+	}else if(sortBy==="airline"){
+		if(order==="ASC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+
+				var aName = $(a).attr('airn').toLowerCase();
+				var bName = $(b).attr('airn').toLowerCase();
+				  return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+
+		}else if(order==="DESC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+
+				  var aName = $(a).attr('airn').toLowerCase();
+				  var bName = $(b).attr('airn').toLowerCase();
+				  return ((bName < aName) ? -1 : ((bName > aName) ? 1 : 0));
+			 })
+			 $('#'+segmentId).empty().prepend(sortedListCR);
+		}
+	}else if(sortBy==="depart"){
+		if(order==="ASC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+			      var contentA =parseInt( $(a).attr('dep'));
+			      var contentB =parseInt( $(b).attr('dep'));
+			      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+
+		}else if(order==="DESC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+			      var contentA =parseInt( $(a).attr('dep'));
+			      var contentB =parseInt( $(b).attr('dep'));
+			      return (contentB < contentA) ? -1 : (contentB > contentA) ? 1 : 0;
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+		}
+	}else if(sortBy==="arrive"){
+		if(order==="ASC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+			      var contentA =parseInt( $(a).attr('arr'));
+			      var contentB =parseInt( $(b).attr('arr'));
+			      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+
+		}else if(order==="DESC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+			      var contentA =parseInt( $(a).attr('arr'));
+			      var contentB =parseInt( $(b).attr('arr'));
+			      return (contentB < contentA) ? -1 : (contentB > contentA) ? 1 : 0;
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+		}
+	}else if(sortBy==="duration"){
+		if(order==="ASC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+			      var contentA =parseInt( $(a).attr('dura'));
+			      var contentB =parseInt( $(b).attr('dura'));
+			      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+
+		}else if(order==="DESC"){
+
+			sortedListCR = $('#'+segmentId).children().sort(function (a, b) {
+			      var contentA =parseInt( $(a).attr('dura'));
+			      var contentB =parseInt( $(b).attr('dura'));
+			      return (contentB < contentA) ? -1 : (contentB > contentA) ? 1 : 0;
+			   })
+			   $('#'+segmentId).empty().append(sortedListCR);
+		}
+	}
+
+}
+
+
+
+function fixFilterDiv(id) {
+
+	var fixedTop = $(id).offset().top + $(id).height();
+	var relativeHeight = $(id).height();
+	var fixedHeight = relativeHeight - $(id).offset().top
+	var fixedWidth = ($(id).width());
+	 var fixedLeft = ($(id).offset().left );
+	$(window).scroll(function () {
+
+	 	 var $cache = $(id);
+
+		  if ($(window).scrollTop() > (fixedTop-100)){
+			    $cache.css({'position': 'fixed', 'left':fixedLeft, 'width':fixedWidth , 'height':635, 'top':'10px' , 'overflow-y': 'auto' , 'overflow-x': 'hidden'});
+		  } else {
+	    		$cache.css({'position': 'relative', 'top': '0px' , 'left':'0px' ,'height':'auto', 'overflow' : 'none' });
+		}
+	});
+
+
+}
+
+
+
+function clearSearchResults(){
+
+	 //entities = new Array();
+
+	 var roundtrip = document.getElementById("segments_roundtrip");
+	 //roundtrip.innerText = "";
+	 $(roundtrip).empty();
+
+	 //_selections = {};
+
+	 // var selection = document.getElementById("seleted_entities_list");
+
+	 //if(selection){
+			//selection.innerText = "";
+			//$(selection).empty();
+	 //}
+
+
+
+	 var root = document.getElementById("segments");
+	 $(root).empty();
+
+	 root = document.getElementById("roundtrip");
+	 $(root).empty();
+
+
+
+	var prev = document.getElementById("prev");
+	prev.style.display = "none";
+	var next = document.getElementById("next");
+	next.style.display = "none";
+
+	var mask = document.getElementById("mask");
+
+
+}
+
+function init(){
+
+	if(gv_FlightType != "multi-city"){
+
+		if( !$('#city_from_txt_0').val()) {
+			customInputValidation('', '', 'Please Select Origin','city_from_txt_0');
+			return false;
+		}
+		if( !$('#city_to_txt_0').val()) {
+			customInputValidation('', '', 'Please Select Destination','city_to_txt_0');
+			return false;
+		}
+		if( !$('#date_txt_0').val()) {
+			customInputValidation('', '', 'Please Select Depart Date','date_txt_0');
+			return false;
+		}
+
+		if(!$('#return_date_txt_0').prop('disabled')){
+
+			if( !$('#return_date_txt_0').val()) {
+				customInputValidation('', '', 'Please Select Return Date','return_date_txt_0');
+				return false;
+			}
+		}
+
+	}else{
+
+		var tableElement = document.getElementById('search-table-3');
+		var inputElements = $(tableElement).find('input:text');
+		var inputError = false;
+		$(inputElements).each(function( index,element ) {
+
+			if($(element).val() == ""){
+				customInputValidation('', '', 'Please Enter the Value', $(element)[0].id);
+				inputError = true;
+				return false;
+			}else{
+				inputError = false;
+			}
+			//console.log( inputEle.val() + " : test");
+
+		});
+
+		if(inputError)
+			return false;
+	}
+
+
+
+
+
+	//$("#searching-dialog").dialog("close");
+	$("#searchForm").css({
+		"margin-top" : "0"
+	});
+	$('#progress-bar-status').css('width', '0');
+
+	$("#bgImg").removeClass('active');
+	$("#resultHeader").removeClass('hidden');
+	$("#searchPanel").attr('class', 'panel panel-default panel-theme-default border-r margin-b-2');
+	//$("#panel-body-search-div").collapse('toggle');
+	$("#resultContainer").removeClass('hidden');
+
+	//fixFilterDiv('#seleted_entities_list');
+	loadAvgTicketAvailability();
+	$('#flightDealsContainer').hide();
+	$('#modifySearchBtn').html('Modify search');
+	//document.getElementById("modifySearchBtn").style.visibility="visible";
+	globalEntities = new Array();
+	clearSearchResults();
+	$("#selected_hotels_template").slideUp( "slow" );
+	root = document.getElementById("segmentHeader");
+	$(root).empty();
+
+	$('#panel-body-show-deals-div').collapse('hide');
+	$("#panel-body-search-div").collapse('hide');
+
+
+	$("#searching-dialog").dialog({
+		width : 600,
+		modal : true,
+		show : {
+			effect : "drop",
+			direction : "down",
+			duration : 500
+
+		},
+		hide : {
+			effect : "drop",
+			direction : "down",
+			duration : 500
+		},
+		position : [ ($(window).width() / 2) - (600 / 2), 150 ],
+		close : function(event, ui) {
+			//document.getElementById('booking-progress-label').innerHTML = "";
+			//$("#searching-dialog").dialog("close");
+			//$("#searching-dialog").dialog("destroy");
+		},
+		open : function(event, ui) {
+			$(".ui-dialog-titlebar-close, .ui-dialog-titlebar").hide();
+		}
+	});
+
+	//document.getElementById("search_progress").style.display="";
+
+	$.ajax({
+		 xhr: function () {
+		        var xhr = new window.XMLHttpRequest();
+		        xhr.upload.addEventListener("progress", function (evt) {
+		            if (evt.lengthComputable) {
+		                var percentComplete = evt.loaded / evt.total;
+		                console.log(percentComplete);
+
+		                $('#progress-bar-status').css('width', percentComplete * 100 +'%').attr('aria-valuenow', percentComplete * 100 );
+
+		                /* $('.progress').css({
+		                    width: percentComplete * 100 + '%'
+		                }); */
+		                if (percentComplete === 1) {
+		                    $('#progress-bar-status').addClass('hide');
+		                }
+		            }
+		        }, false);
+		        xhr.addEventListener("progress", function (evt) {
+		            if (evt.lengthComputable) {
+		                var percentComplete = evt.loaded / evt.total;
+		                console.log(percentComplete);
+		               /*  $('.progress').css({
+		                    width: percentComplete * 100 + '%'
+		                }); */
+		                $('#progress-bar-status').css('width', percentComplete * 100 +'%').attr('aria-valuenow', percentComplete * 100 );
+		            }
+		        }, false);
+		        return xhr;
+		    },
+		url:"web/jsp/GetProviders.jsp?type=air",
+		success:function(result){
+
+		var providers = result['providers'];
+		//var _currentPercent = 0;
+
+		for (var i = 0; i < providers.length; i++) {
+
+			var provider = providers[i];
+			var providerId = provider['provider'];
+			getContent(providerId);
+
+			//_currentPercent = 100/i;
+			// $('#progress-bar-status').css('width', _currentPercent+'%').attr('aria-valuenow', _currentPercent);
+		}
+
+	}
+
+	});
+
+}
+
+function openSearchDiv(){
+	 $("#panel-body-search-div").collapse('toggle');
+}
+function openShowDealsDiv(){
+	 $("#panel-body-show-deals-div").collapse('toggle');
+}
+
+function getOnwardSegmentObject(id){
+
+	var segmentObject = {};
+
+	var departureCity = getIATACode(document.getElementById("city_from_txt_" + id ).value);
+	var arrivalCity = getIATACode(document.getElementById("city_to_txt_" + id ).value);
+	var adultCount = getAdultCount();
+	var childrenCount = getChildrenCount();
+	var classType = getClassType();
+
+	segmentObject['adult_count'] = adultCount;
+	segmentObject['children_count'] = childrenCount;
+	segmentObject['depart_date'] = getDateFromFormat(document.getElementById("date_txt_" + id ).value);
+	segmentObject['depart_city_code'] = departureCity;
+	segmentObject['arrive_city_code'] = arrivalCity;
+	segmentObject['segment'] = departureCity + "_" + arrivalCity;
+	segmentObject['class_type'] = classType;
+
+	return segmentObject;
+
+}
+
+function getReturnSegmentObject(id){
+
+	var segmentObject = {};
+
+	var arrivalCity = getIATACode(document.getElementById("city_from_txt_" + id ).value);
+	var departureCity = getIATACode(document.getElementById("city_to_txt_" + id ).value);
+	var adultCount = getAdultCount();
+	var childrenCount = getChildrenCount();
+	var classType = getClassType();
+
+	segmentObject['adult_count'] = adultCount;
+	segmentObject['children_count'] = childrenCount;
+	segmentObject['depart_date'] = getDateFromFormat(document.getElementById("return_date_txt_" + id ).value);
+	segmentObject['depart_city_code'] = departureCity;
+	segmentObject['arrive_city_code'] = arrivalCity;
+	segmentObject['segment'] = departureCity + "_" + arrivalCity;
+	segmentObject['class_type'] = classType;
+
+	return segmentObject;
+
+}
+
+function getSegmentSearchObject(id){
+
+	var segmentObject = {};
+
+	var departureCity = getIATACode(document.getElementById("city_from_txt_" + id ).value);
+	var arrivalCity = getIATACode(document.getElementById("city_to_txt_" + id ).value);
+	var adultCount = document.getElementById("txt_adult_count_1").value;
+	var childrenCount = document.getElementById("txt_child_count_1").value;
+	var classType = document.getElementById("txt_class_1").value;
+	segmentObject['adult_count'] = adultCount;
+	segmentObject['children_count'] = childrenCount;
+
+	segmentObject['depart_date'] = getDateFromFormat(document.getElementById("date_txt_" + id ).value);
+	segmentObject['depart_city_code'] = departureCity;
+	segmentObject['arrive_city_code'] = arrivalCity;
+	segmentObject['segment'] = departureCity + "_" + arrivalCity;
+	segmentObject['class_type'] = classType;
+
+	return segmentObject;
+
+}
+
+function getIATACode(cityCode){
+
+	var words = cityCode.split(" ");
+	var iataCode = words[words.length - 1];
+
+	iataCode = iataCode.substring(1,iataCode.length - 1);
+
+	return iataCode;
+
+}
+
+function getSegmentSearchObjects(){
+
+
+	segmentObjects = [];
+
+	if(gv_FlightType == "one-way"){
+
+		var segmentObject = getOnwardSegmentObject(_segmentRows[0]);
+
+		segmentObjects.push(segmentObject);
+		_segmentDeptTimes[segmentObject['segment']] = getOnwardTime();
+
+		var departureCity = segmentObject['depart_city_code'];
+		var arrivalCity = segmentObject['arrive_city_code'];
+		var segmentName = departureCity + "_" + arrivalCity;
+
+		createSegmentHeader(segmentName);
+
+		var root = document.getElementById(segmentName);
+		if(!root){
+			//createSegment(segmentName);
+		}
+
+	}else if(gv_FlightType == "round-trip"){
+
+		var onwardSegmentObject = getOnwardSegmentObject(_segmentRows[0]);
+
+		segmentObjects.push(onwardSegmentObject);
+		_segmentDeptTimes[onwardSegmentObject['segment']] = getOnwardTime();
+
+		var returnSegmentObject = getReturnSegmentObject(_segmentRows[0]);
+
+		segmentObjects.push(returnSegmentObject);
+		_segmentDeptTimes[returnSegmentObject['segment']] = getReturnTime();
+
+
+		var departureCity = onwardSegmentObject['depart_city_code'];
+		var arrivalCity = onwardSegmentObject['arrive_city_code'];
+		var segmentName = departureCity + "_" + arrivalCity;
+
+		createSegmentHeader(segmentName);
+
+		var root = document.getElementById(segmentName);
+		if(!root){
+			//createSegment(segmentName);
+		}
+
+		 departureCity = returnSegmentObject['depart_city_code'];
+		 arrivalCity = returnSegmentObject['arrive_city_code'];
+		 segmentName = departureCity + "_" + arrivalCity;
+
+		 root = document.getElementById(segmentName);
+		 if(!root){
+				//createSegment(segmentName);
+		  }
+
+	} else {
+
+		var length = _segmentRows.length;
+
+		for(var i = 0; i < length;i++){
+
+			var segmentObject = getSegmentSearchObject(i+1);
+			segmentObjects.push(segmentObject);
+
+			var departureCity = segmentObject['depart_city_code'];
+			var arrivalCity = segmentObject['arrive_city_code'];
+			var segmentName = departureCity + "_" + arrivalCity;
+
+			var root = document.getElementById(segmentName);
+			if(!root){
+				//createSegment(segmentName);
+			}
+
+		}
+
+		createSegmentHeader(segmentName);
+	}
+
+	return segmentObjects;
+
+}
+
+
+function getOnwardTime(){
+
+	//var time = document.getElementById("time_txt_0").value;
+
+	//return time;
+
+}
+
+function getReturnTime(){
+
+	//var time = document.getElementById("time_txt_1").value;
+
+	//return time;
+
+}
+
+function getAdultCount(){
+	var count = document.getElementById("txt_adult_count").value;
+
+	return count;
+}
+
+function getChildrenCount(){
+
+	var count = document.getElementById("txt_children_count").value;
+
+	return count;
+}
+
+function getClassType(){
+	var classType = document.getElementById("txt_class").value;
+	return classType;
+}
+function showResults(){
+
+	_curr_page_limit = 0;
+	_new_page_limit = 10;
+
+	$.each(segment_onWards.slice(_curr_page_limit, _new_page_limit) , function( i , val) {
+		renderEntity(val, globalConfig,val['provider']);
+	});
+	$.each(segment_return.slice(_curr_page_limit, _new_page_limit) , function( i , val) {
+		renderEntity(val, globalConfig,val['provider']);
+	});
+	$.each(segment_OR.slice(_curr_page_limit, _new_page_limit) , function( i , val) {
+		renderEntity(val, globalConfig,val['provider']);
+	});
+
+	$("#searching-dialog").dialog("close");
+
+}
+$(window).scroll(function(){
+
+	if($(window).scrollTop() == $(document).height() - $(window).height())
+    {
+		//console.log($(document).height() - $(window).height());
+		_curr_page_limit = _new_page_limit;
+    	_new_page_limit += 10;
+
+    	$.each(segment_onWards.slice(_curr_page_limit, _new_page_limit) , function( i , val) {
+    		renderEntity(val, globalConfig,val['provider']);
+    	});
+    	$.each(segment_return.slice(_curr_page_limit, _new_page_limit) , function( i , val) {
+    		renderEntity(val, globalConfig,val['provider']);
+    	});
+    	$.each(segment_OR.slice(_curr_page_limit, _new_page_limit) , function( i , val) {
+    		renderEntity(val, globalConfig,val['provider']);
+    	});
+    }
+});
+
+var segment_onWards = [];
+var segment_return = [];
+var segment_OR = [];
+
+function getContent(providerId){
+
+	segmentObjects = getSegmentSearchObjects();
+	var searchString = JSON.stringify(segmentObjects);
+
+	$.ajax({url:"web/jsp/Search.jsp?providerId=" + providerId + "&searchData=" + encodeURIComponent(searchString)
+			+ "&flightType=" + gv_FlightType,success:function(result){
+
+
+			globalEntities = $.merge(globalEntities,result['entities']);
+			globalConfig = result['config'];
+
+			var _array = [];
+
+			if(globalEntities.length !== 0){ //globalEntities are not equal to empty & not equal to null
+
+				for (var i = 0; i < globalEntities.length; i++) {
+
+					var entity = globalEntities[i];
+
+					if(!globalEntities[i]['provider']){
+						globalEntities[i]['provider'] = providerId;
+
+					}
+
+					//renderEntity(entity,globalConfig, providerId);
+
+					if(entity['fareDetails']){
+						var fareDetails = entity['fareDetails'][0];
+						var total = fareDetails['total'];
+						var formatPrice = $.trim(total);
+						var price = formatPrice.split(" ");
+						_array.push(price[1]);
+					}
+
+					//$("#searching-dialog").dialog("close");
+					//document.getElementById("search_progress").style.display="none";
+					document.getElementById("root").style.display = "block";
+				}
+
+				maxVal = Math.max.apply(Math,_array); // 3
+				minVal = Math.min.apply(Math,_array); // 1
+
+
+				 $( "#slider-range" ).slider({
+				      range: true,
+				      min: minVal,
+				      max: maxVal,
+				      values: [ minVal, maxVal ],
+				      animate:"slow",
+				      slide: function( event, ui ) {
+				        $( "#amount" ).val( ui.values[ 0 ] + " INR - " + ui.values[ 1 ]+" INR" );
+				      }
+				  });
+				$( "#amount" ).val( " " + $( "#slider-range" ).slider( "values", 0 ) + " INR - " + $( "#slider-range" ).slider( "values", 1 )+" INR" );
+
+
+
+			}else{
+
+				//$("#searching-dialog").dialog("close");
+				//document.getElementById("search_progress").style.display="none";
+				//isNoResults(null);
+			}
+		}
+	});
+
+	loadAllExistingTrips(segmentObjects, "AIR");
+
+}
+function refreshRenderEntity(){
+
+	clearSearchResults();
+	segment_onWards = [];
+	segment_return = [];
+	segment_OR = [];
+	var tempEntities = globalEntities;
+
+	//Anandan Selvaganesan: Filter by name
+	if(typedAirLineNameFilterVal && typedAirLineNameFilterVal != "XX"){
+		tempEntities = jQuery.grep(tempEntities, function( n, i ) {
+			var direction = n['direction'][0];
+			var leg = direction['leg'][0];
+
+			var airname = leg['flight_name'];
+			var aircodenum = leg['flight_code'] +" "+leg['flight_number'];
+			var airnum = leg['flight_number'];
+
+			var exp = new RegExp('^' + typedAirLineNameFilterVal, 'i');
+
+			var isMatch = exp.test(airname);
+			if(isMatch){
+				return tempEntities[i];
+			}
+
+			isMatch = exp.test(aircodenum);
+			if(isMatch){
+				return tempEntities[i];
+			}
+
+			isMatch = exp.test(airnum);
+			if(isMatch){
+				return tempEntities[i];
+			}
+
+		});
+	}
+
+	//Anandan Selvaganesan: Filter by price range
+	var minPrice = $( "#slider-range" ).slider( "values", 0 );
+	var maxPrice = $( "#slider-range" ).slider( "values", 1 );
+	tempEntities = jQuery.grep(tempEntities, function( n, i ) {
+		if(n['fareDetails']){
+			var fareDetails = n['fareDetails'][0];
+			var total = fareDetails['total'];
+			var formatPrice = $.trim(total);
+			var price = formatPrice.split(" ");
+			var value = price[1];
+			if(value >= minPrice && value <= maxPrice)
+			{
+				return tempEntities[i];
+			}
+		}
+	});
+
+	//Anandan Selvaganesan: Filter by stops
+	if(selectedStops.length != 0){
+		tempEntities = jQuery.grep(tempEntities, function( n, i ) {
+			var direction = n['direction'][0];
+			var stops = direction['stops'];
+
+			for (var j = 0; j < selectedStops.length; j++) {
+
+				if(selectedStops[j] == stops){
+					return tempEntities[i];
+				}
+			}
+		});
+	}
+
+	for (var i = 0; i < tempEntities.length; i++) {
+		var entity = tempEntities[i];
+
+		//renderEntity(entity,globalConfig,entity['provider']);
+		if(tempEntities[i]['direction_type'] == 'O'){
+
+			segment_onWards.push(tempEntities[i]);
+
+		}else if(tempEntities[i]['direction_type'] == 'R'){
+
+			segment_return.push(tempEntities[i]);
+
+		}else if(tempEntities[i]['direction_type'] == 'OR'){
+
+			segment_OR.push(tempEntities[i]);
+
+		}else{
+
+		}
+
+		if((tempEntities.length-1) == i){
+
+			showResults();
+			isNoResults(entity);
+		}
+	}
+
+	if(tempEntities.length == 0){
+
+		isNoResults(null);
+	}
+
+
+}
+
+function isNoResults(entity){
+
+	segmentName = segmentObjects[0]['segment'];
+
+
+	if(entity){
+
+		tripType = entity['trip_type'];
+		tripCode = entity['trip_code'];
+	}
+
+	if(gv_FlightType == "one-way"){
+
+		var segmentName =  segmentName + '_O';
+		var root = document.getElementById(segmentName);
+		if(!root){
+
+			if(document.getElementById("segments").innerHTML == ""){
+				root =  document.getElementById("segments");
+			}
+
+		}
+
+		if(root.innerHTML == ""){
+			var noFlightDiv = noFlight();
+			root.appendChild(noFlightDiv);
+		}
+
+
+
+	} else if (gv_FlightType == "round-trip") {
+
+		if(tripCode == "D"){
+
+			var words = segmentName.split("_");
+			var onwardName = words[0];
+			var returnName = words[1];
+
+			var segmentName =  segmentName + '_O';
+			var reverseSegmentName =  returnName  +'_'+ onwardName + '_R';
+			var roundSegmentName =   onwardName +'_'+ returnName + '_OR'
+
+			var root = document.getElementById(segmentName);
+
+			if(!root){
+
+				if(document.getElementById("segments").innerHTML == ""){
+					root =  document.getElementById("segments");
+				}
+
+			}
+
+			if(root.innerHTML == ""){
+				var noFlightDiv = noFlight();
+				root.appendChild(noFlightDiv);
+			}
+
+			var root = document.getElementById(reverseSegmentName);
+			if(root.innerHTML == ""){
+				var noFlightDiv = noFlight();
+				root.appendChild(noFlightDiv);
+			}
+
+			var root = document.getElementById(roundSegmentName);
+			if(root.innerHTML == ""){
+
+				var noFlightDiv = noFlight();
+				root.appendChild(noFlightDiv);
+				$('#flightDealsContainer').hide();
+			}
+
+		}else{
+
+			segmentName = segmentName + '_OR';
+			var root = document.getElementById(segmentName);
+
+			if(!root){
+
+				if(document.getElementById("segments_roundtrip").innerHTML == ""){
+					root =  document.getElementById("segments_roundtrip");
+				}
+
+			}
+
+			if(root.innerHTML == ""){
+				var noFlightDiv = noFlight();
+				root.appendChild(noFlightDiv);
+			}
+
+
+		}
+
+	}else{
+
+
+	}
+
+
+
+}
+function noFlight(){
+
+	var div = document.createElement('div');
+	div.setAttribute('class', 'col-xs-12 bg-white p-t-b-20 margin-b-2 border-1-ddd p-r-0 p-l-0');
+
+	var h5 = document.createElement("h6");
+	h5.setAttribute('class', 'text-center p-t-b-22 gray-color');
+	$(h5).html("No Flights!")
+	div.appendChild(h5);
+
+	return div;
+
+}
+function filterByStops(e){
+
+	selectedStops = [];
+
+	if($(e).attr('data-selected') == "0"){
+		selectedStops.push($(e).attr('data-value'));
+		$(e).attr('data-selected','1');
+
+	}else{
+		$(e).attr('data-selected','0');
+	}
+
+	for(var i=0;i<maxStops;i++){
+
+		if($(e)[0].id != ("total_stop_"+i)){
+
+			if($("#total_stop_"+i).attr('data-selected') == "1"){
+				selectedStops.push(i.toString());
+			}
+		}
+
+	}
+	refreshRenderEntity();
+}
+function filterByName(){
+	var typedHotelName = $("#filterAirLineName").val();
+	typedHotelName = typedHotelName.trim();
+	if(typedHotelName!="" && typedHotelName.length >= 1){
+		var initIndex = typedAirLineNameFilterVal.indexOf("XX");
+		if (initIndex > -1) {
+			typedAirLineNameFilterVal = "";
+		}
+		typedAirLineNameFilterVal = typedHotelName;
+		refreshRenderEntity();
+	}else{
+		typedAirLineNameFilterVal = "XX";
+		refreshRenderEntity();
+	}
+}
+function clearFilter() {
+
+	typedAirLineNameFilterVal = "XX";
+	$("#filterAirLineName").val("");
+	$("#slider-range").slider("option", "values", [minVal , maxVal]);
+    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) + " INR - " + $( "#slider-range" ).slider( "values", 1 )+" INR");
+    selectedStops = [];
+
+    refreshRenderEntity();
+}
+function renderEntity(entity,config, providerId){
+
+	var length = entities.length;
+	entities[length] = entity;
+	entity['id'] = providerId+'_'+length;
+
+	tripType = entity['trip_type'];
+	var segmentName = entity['segment_id'].toUpperCase() +'_'+ entity['direction_type'];
+	 if(null != config && !jQuery.isEmptyObject(config) && tripType != "return"){
+
+		var isVisible = compare(entity, config);
+		if(!isVisible)
+			return;
+
+	} else if(null != config && !jQuery.isEmptyObject(config) && tripType == "return"){
+
+		var isVisible = compare(entity, "return");
+		if(!isVisible)
+			return;
+	}
+
+	var type = entity['type'];
+	var id = entity['id'];
+	var renderer = getEntityRenderer(type);
+	var html = renderer.renderEntity(entity);
+	var segmentsDiv = document.getElementById("segments");
+
+	var root = document.getElementById(segmentName);
+
+	 if(segmentsDiv.innerHTML == ""){
+
+		createAllSegment(segmentName,entity);
+		root = document.getElementById(segmentName);
+	}
+		//Air line name
+		var direction = entity['direction'][0];
+		var leg = direction['leg'][0];
+		var airname = leg['flight_name'];
+
+		var departTime = leg['departure_time'];
+
+		var lastLeg = direction['leg'][direction['leg'].length-1]
+		var arriveTime = lastLeg['arrival_time'];
+
+		var duration = direction['duration'];
+		//Price
+		var fareDetails = entity['fareDetails'][0];
+		var total = fareDetails['total'];
+		var formatPrice = $.trim(total);
+		var price = formatPrice.split(" ");
+		var value = price[1];
+
+		var div = document.createElement("div");
+		div.setAttribute('class', 'col-xs-12 p-l-0 p-r-0');
+		div.setAttribute('pr',value);
+		div.setAttribute('airn',airname);
+		div.setAttribute('dep',departTime);
+		div.setAttribute('arr',arriveTime);
+		div.setAttribute('dura',duration);
+		div.id = id;
+		div.innerHTML = html;
+
+		root.appendChild(div);
+
+		//addSeperator(id + "-seperator",root);
+		$("#a_" + id).uitooltip(
+				{
+					content : function() {
+						var content = $("#div_" + id).html();
+						return content;
+					},
+					position : {
+						//my : "center top",
+						//at : "center top",
+						using : function(position, feedback) {
+							$(this).css(position);
+							$("<div>").addClass("arrow").addClass(
+									feedback.vertical).addClass(
+									feedback.horizontal).appendTo(this);
+						}
+					}
+				});
+
+
+
+
+}
+
+function createAllSegment(segmentName,entity) {
+
+	segmentName = segmentObjects[0]['segment'];
+
+	if(entity){
+
+		tripType = entity['trip_type'];
+		tripCode = entity['trip_code'];
+	}
+
+
+	if(gv_FlightType == "one-way"){
+		var segmentName =  segmentName + '_O';
+		createSegment(segmentName,entity);
+
+	} else if (gv_FlightType == "round-trip") {
+
+		if(tripCode == "D"){
+
+			var words = segmentName.split("_");
+			var onwardName = words[0];
+			var returnName = words[1];
+
+			var segmentName =  onwardName  +'_'+ returnName + '_O';
+			var reverseSegmentName =  returnName  +'_'+ onwardName + '_R';
+			var roundSegmentName =   onwardName +'_'+ returnName + '_OR'
+
+			createSegment(segmentName,entity);
+			createSegment(reverseSegmentName,entity);
+			createSegment(roundSegmentName,entity,'OR');
+
+		}else{
+
+			var segmentName =  segmentName + '_OR';
+			createSegment(segmentName,entity,'OR');
+
+		}
+
+	}else{
+
+
+	}
+
+
+}
+function createSegment(segmentName,entity,direction_type) {
+
+	tripType = entity['trip_type'];
+	tripCode = entity['trip_code'];
+
+	var segmentsDiv = document.getElementById("segments");
+
+	if(direction_type == "OR"){
+		segmentsDiv = document.getElementById("segments_roundtrip");
+
+		if(tripCode == "I"){
+			$('#panel-body-show-deals-div').collapse('show');
+		}else{
+			$('#flightDealsContainer').show();
+			$('#panel-body-show-deals-div').collapse('hide');
+		}
+
+	}
+
+	//var mask = document.getElementById("mask");
+	var currentChildCount = 0;
+	var segmentsChildrCount = $(segmentsDiv).children().length;
+	currentChildCount = segmentsChildrCount;
+	var segment = document.getElementById(segmentName);
+
+	if (segment == null) {
+
+			var root = document.createElement("div");
+			root.id = segmentName;
+			root.setAttribute('class', 'col-xs-12 p-l-0 p-r-0');
+
+			var sortDiv = document.createElement("div");
+			sortDiv.id = "sortBy_"+segmentName;
+
+			if (gv_FlightType == "one-way") {
+
+				sortDiv.setAttribute('class', 'col-xs-12 p-l-0 p-r-0');
+
+
+			} else if (gv_FlightType == "round-trip") {
+
+				if (tripType == "roundtrip") {
+
+					if(tripCode == "I" ||  direction_type == 'OR'){
+						sortDiv.setAttribute('class', 'col-xs-12 p-l-0 p-r-0');
+					}else{
+
+						if(currentChildCount != 1){
+							sortDiv.setAttribute('class', 'col-xs-6 active p-l-0 p-r-1');
+						}else{
+							sortDiv.setAttribute('class', 'col-xs-6 active p-r-0 p-l-1');
+						}
+					}
+
+				} else if (tripType == "onward") {
+
+					sortDiv.setAttribute('class', 'col-xs-12 p-l-0 p-r-0');
+				}
+
+			} else {
+				sortDiv.setAttribute('class', 'col-xs-6 p-l-0 p-r-1');
+			}
+
+			//if(currentChildCount == 0){
+				//var segmentHeaderDiv = createSegmentHeader(segmentName);
+
+			//}
+
+			segmentsDiv.appendChild(sortDiv);
+			var segmentSortDiv = createSortHeader(segmentName);
+			sortDiv.appendChild(segmentSortDiv);
+
+
+			sortDiv.appendChild(root);
+			//var childList = segmentsDiv.childNodes.length - 1;
+			//var list = document.getElementById("myList");    // Get the <ul> element to insert a new node
+			//segmentsDiv.insertBefore(root, segmentsDiv.childNodes[childList]);
+		}
+	}
+function createSortHeader(segmentName){
+
+	if (!segmentName)
+		return "";
+
+	//var segmentId = segmentName.id;
+
+	var div = '<div class="panel panel-default margin-b-0 border-r">'
+		+ '<div class="panel-heading panel-heading-default p-l-5 p-r-5 p-t-b-0">'
+
+		+ '<div class="col-xs-9 p-l-0 p-r-0">'
+		+ '<div class="col-xs-3 p-l-0 p-r-0"><a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0" href="javascript:void(0);" onclick="showAirLineWise(this)" parent-id='+segmentName+'>Airline <i class="fa fa-sort hidden" aria-hidden="true"></i></a></div>'
+		+ '<div class="col-xs-3 p-l-0 p-r-0"><a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0" href="javascript:void(0);" onclick="showDepartWise(this)" parent-id='+segmentName+'>Depart <i class="fa fa-sort hidden" aria-hidden="true"></i></a></div>'
+		+ '<div class="col-xs-3 p-l-0 p-r-0"><a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0" href="javascript:void(0);" onclick="showArriveWise(this)" parent-id='+segmentName+'>Arrive <i class="fa fa-sort hidden" aria-hidden="true"></i></a></div>'
+		+ '<div class="col-xs-3 p-l-0 p-r-0"><a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0" href="javascript:void(0);" onclick="showDurationWise(this)" parent-id='+segmentName+'>Duration <i class="fa fa-sort hidden" aria-hidden="true"></i></a></div>'
+		+ '</div>'
+
+		+ '<div class="col-xs-3 p-l-0 p-r-0">'
+		+ '<div class="col-xs-12 p-l-0 p-r-0 text-right"><a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0" href="javascript:void(0);" onclick="showPriceWise(this);" parent-id='+segmentName+'>Price <i class="fa fa-sort hidden" aria-hidden="true"></i></a></div>'
+		+ '</div>'
+
+		+ '<div class="clearfix"></div>'
+
+		+ '</div>'
+
+	var divObj = document.createElement("div");
+	//var divObj = document.getElementById("segmentHeader");
+	divObj.innerHTML = div;
+	return divObj;
+
+}
+function createSegmentHeader(segmentName){
+
+		if (!segmentName)
+			return "";
+
+		var words = segmentName.split("_");
+
+		var onwardName = words[0];
+
+		var returnName = words[1];
+
+		var adultCount = document.getElementById("txt_adult_count").value;
+		var childCount = document.getElementById("txt_children_count").value;
+		var onewayDate = document.getElementById("date_txt_0").value;
+		var roundToDate = document.getElementById("return_date_txt_0").value;
+
+		var fromCity =  $('#city_from_txt_0').val();
+		var toCity = $('#city_to_txt_0').val();
+
+		$("#traveller_details").html( adultCount + " Adult | " + childCount + " Children");
+		$("#depart_city_code_ui").html(onwardName);
+		$("#arrival_city_code_ui").html(returnName);
+
+		$("#travel_date").html("&mdash; "+ onewayDate + " &rarr;");
+
+		$("#depart_city_name_ui").html(fromCity.split(" ")[0]);
+		$("#arrival_city_name_ui").html(toCity.split(" ")[0]);
+
+
+
+
+		var div = "<div class='margin-t-1'>";
+
+		if (gv_FlightType == "one-way") {
+
+			div += "<h4 class='panel-title'>" + onwardName
+					+ "<span class='arrow-style'> &rarr; </span>" + returnName
+					+ "</h4>";
+			div += "<p class='margin-b-0'>" + onewayDate + " | " + adultCount
+					+ " Adult | " + childCount + " Children </p>";
+
+
+
+		} else if (gv_FlightType == "round-trip") {
+
+
+			div += "<h4 class='panel-title'>" + onwardName
+			+ "<span class='arrow-style'> &#8644; </span>" + returnName
+			+ "</h4>";
+
+			div += "<p class='margin-b-0'>" + onewayDate + " - " + roundToDate
+					+ " | " + adultCount + " adult | " + childCount
+					+ " Children </p>";
+		} else {
+
+			div += "<h4 class='panel-title'>" + onwardName
+					+ "<span class='arrow-style'> &rarr; </span>" + returnName
+					+ "</h4>";
+			div += "<p class='margin-b-0'>" + onewayDate + " - " + roundToDate
+					+ " | " + adultCount + " adult | " + childCount
+					+ " Children </p>";
+		}
+
+		div += "</div>";
+
+		//var divObj = document.createElement("div");
+		var divObj = document.getElementById("segmentHeader");
+		//$(divObj).appendChild(div);
+		divObj.innerHTML = div;
+
+		//return divObj;
+
+	}
+
+	function searchResults(data) {
+
+		var reqURL = "MiceUserListofBookings.do?method=getAirDetails&requestId="
+				+ data.id;
+		$
+				.getJSON(
+						reqURL,
+						function(data1) {
+							if (data1 != null) {
+								document.getElementById("request-id").value = data.id;
+
+								document.getElementById("txt_city").value = data1[0].depart_city
+										+ ", " + data1[0].depart_city_code;
+
+								document.getElementById("txt_to_city").value = data1[0].arrive_city
+										+ ", " + data1[0].arrive_city_code;
+
+								document.getElementById("txt_indate").value = data1[0].depart_date
+										.split(" ")[0];
+
+								document.getElementById("txt_outdate").value = data1[1].depart_date
+										.split(" ")[0];
+
+								document.getElementById("txt_intime").value = data1[0].depart_date
+										.split(" ")[1];
+
+								document.getElementById("txt_outtime").value = data1[1].depart_date
+										.split(" ")[1];
+
+								if (data.Flight_Type == "round-trip") {
+									document.getElementById('opt_roundtrip').checked = true;
+									document.getElementById('opt_oneway').checked = false;
+								}
+
+								if (data.Option_Data != "") {
+									var entity = JSON.parse(data.Option_Data);
+									renderEntity(entity);
+								} else {
+									init();
+								}
+
+							}
+						});
+
+	}
+
+	function addSeperator(id, parent) {
+
+		//add seperator
+
+		var seperatorDiv = document.createElement("div");
+		seperatorDiv.className = "hotel_seperator";
+		seperatorDiv.id = id;
+
+		//parent.appendChild(seperatorDiv);
+
+		var seperatorLabel = document.createElement("label");
+		seperatorLabel.height = "100px";
+		seperatorLabel.innerText = ".";
+
+		//seperatorDiv.appendChild(seperatorLabel);
+
+		return seperatorDiv;
+
+	}
+
+	function onClickOneWay() {
+		document.getElementById('opt_roundtrip').checked = false;
+		document.getElementById('opt_multicity').checked = false;
+		gv_FlightType = "one-way";
+	}
+
+	function onClickReturn() {
+		document.getElementById('opt_oneway').checked = false;
+		document.getElementById('opt_multicity').checked = false;
+		gv_FlightType = "round-trip";
+	}
+
+	function onClickMultiCity() {
+		document.getElementById('opt_oneway').checked = false;
+		document.getElementById('opt_roundtrip').checked = false;
+		gv_FlightType = "multi-city";
+	}
+
+	var isDataLoaded = false;
+
+	function resetForm() {
+
+		clearSearchResults();
+		resetMailInfo();
+
+	}
+
+	function loadAirBookings(id, requestId) {
+
+		isDataLoaded = false;
+		resetForm();
+
+		var reqURL = "MiceUserListofBookings.do?method=getAirBookings";
+
+		if (requestId != null && requestId != "null")
+			reqURL += "&requestId=" + requestId;
+		$.getJSON(reqURL, function(data) {
+			if (data != null && data.length > 0)
+				populateBookings(data, id);
+		});
+	}
+
+	function populateBookings(data, id) {
+
+	}
+
+	function changeTab(id) {
+
+	}
+
+	function refreshFlightData() {
+		showRefreshProgress();
+		var href = window.location.href;
+
+		var reqURL = href.substring(0, href
+				.indexOf('MiceUserListofBookings.do') - 1);
+
+		reqURL += "/rest/flightMailClient/getFlightRequests";
+
+		$.getJSON(reqURL, function(result) {
+			loadAirBookings('new-tab');
+			hideRefreshProgress();
+		});
+	}
+
+	function showRefreshProgress() {
+
+		$("#refresh_progress").dialog({
+			closeOnEscape : false,
+			open : function(event, ui) {
+				$(".ui-dialog-titlebar-close", ui.dialog || ui).hide();
+			}
+		});
+
+	}
+
+	function hideRefreshProgress() {
+
+		document.getElementById("refresh_progress").style.display = "none";
+
+		$("#refresh_progress").dialog("close");
+		$("#refresh_progress").dialog("destroy");
+	}
+
+	$(document).ready(function() {
+		/* var assistdiv = document.getElementById("selected_hotels_template");
+		var assistdiv2 = assistdiv.cloneNode(true);
+		assistdiv2.id="selected_hotels";
+		assistdiv2.style.display="block";
+
+		assistdiv.innerHTML = "";  */
+		//document.getElementById("rightContent").appendChild(assistdiv2);
+	});
+
+
+
+	function showConfirmProgress() {
+
+		$("#confirm_progress").dialog({
+			closeOnEscape : false,
+			open : function(event, ui) {
+				$(".ui-dialog-titlebar-close", ui.dialog || ui).hide();
+			}
+		});
+
+	}
+
+	function hideConfirmProgress() {
+
+		document.getElementById("confirm_progress").style.display = "none";
+
+		$("#confirm_progress").dialog("close");
+		$("#confirm_progress").dialog("destroy");
+	}
+
+	function showBookingProgress(message, isConfirmed, result) {
+
+		if($.trim(document.getElementById('booking-progress-label').innerHTML).length == 0){
+
+			if(message && document.getElementById('booking-progress-label')){
+
+				document.getElementById('booking-progress-label').innerHTML = message;
+
+			}
+
+			$("#booking-dialog").dialog({
+				width : 600,
+				position : [ ($(window).width() / 2) - (600 / 2), 150 ],
+				close: function(event, ui) {
+					document.getElementById('booking-progress-label').innerHTML = "";
+					$("#booking-dialog").dialog("close");
+					$("#booking-dialog").dialog("destroy");
+
+				}
+			});
+
+		}else if(message && document.getElementById('booking-progress-label')){
+
+			document.getElementById('booking-progress-label').innerHTML = message;
+
+			if(isConfirmed && result){
+				document.getElementById('booking_message').innerHTML = "<a href = '#' class = 'btn btn-success btn-sm white-color'" +
+				" onclick = 'redirectToRequestPage("+result['tripReqId']+","+result['screenId']+")'> OK </a>";
+			}else if(result && result['status'] == "ERROR"){
+				document.getElementById('booking_message').innerHTML = "<a href = '#' class = 'btn btn-success btn-sm white-color'" +
+				" onclick = 'reloadPage()'> OK </a>";
+			}
+
+		}
+
+	}
+
+	function reloadPage(){
+
+		location.reload(true);
+
+	}
+
+	function redirectToRequestPage(tripReqId, screenid){
+
+		 var reqURL = "GenericServiceForm.do?method=editRequest";
+		 var tripReqId = tripReqId;
+		 var screenId = screenid;
+		 var tr_no = "";
+		 var sp_services = "";
+		 window_open('POST', reqURL, {"reqId": tripReqId ,"status": 1, "screen_type":"TRIP","screen_id":screenId,
+				"process_id":5 , "is_read_only":"true","tr_no":tr_no,"sp_services":sp_services});
+
+
+	}
+
+	function setBookingStatus(id){
+
+		if(id != "ERROR"){
+			var elements = document.getElementsByClassName('current-step');
+
+			if(elements){
+				for(var int = 0; int < elements.length; int++){
+
+					var element = elements[int];
+
+					if(element){
+
+						element.className = "active";
+
+					}
+
+				}
+			}
+
+			if(id && document.getElementById(id + "-li")){
+
+				document.getElementById(id + "-li").className = "active current-step";
+
+			}
+		}
+
+	}
+
+	function hideBookingProgress() {
+
+		document.getElementById("booking-dialog").style.display = "none";
+		$("#booking-dialog").dialog("close");
+		$("#booking-dialog").dialog("destroy");
+	}
+
+	var cloneDiv;
+	var count = 0;
+	var selectedFlightToBook = 0;
+	var isUserSelectionDone = false;
+
+	function onBook(sectionID, optionData) {
+
+		if(!isUserSelectionDone)
+			checkUserTripSelection(_existingTrips, sectionID, optionData, "confirm");
+
+		if(isUserSelectionDone){
+			selectedFlightToBook = sectionID;
+
+			var root = {};
+
+			var segments = [];
+
+			var selectedObjects = [];
+
+			var price = 0;
+
+
+			var quotedPrice = 0;
+
+			var provider = null;
+
+			for (var int2 = 0; int2 < Object.keys(_selections).length; int2++) {
+				var selectedEntity = _selections[Object.keys(_selections)[int2]];
+				selectedObjects[int2] = selectedEntity;
+
+				var provider = selectedEntity['id'].substring(0, selectedEntity['id'].indexOf("_"));
+
+				var priceString = selectedEntity['price'];
+				priceString = priceString.split(" ")[1];
+				priceString = priceString.replace(",", "");
+				quotedPrice = parseFloat(priceString);
+				price += quotedPrice;
+				selectedEntity['quoted_price'] = quotedPrice;
+
+			}
+
+			if(provider){
+				root['provider'] = provider;
+				root['trip_type'] = "roundtrip";
+				root['type'] = "Air";
+				root['is_selected'] = "true";
+				root['price'] = "INR " + price;
+				root['direction'] = selectedObjects;
+
+				var data = {};
+
+				data['reprice'] = root;
+
+				var dataString = JSON.stringify(data);
+
+				event.stopPropagation();
+
+				setBookingStatus("reprice");
+
+				showBookingProgress("Checking if any fare change..", false);
+
+				$.ajax({
+					url : "rest/flightBooking/rePrice",
+					dataType : "json",
+					contentType: 'application/json',
+					type: 'post',
+					data: dataString,
+					success : function(result) {
+
+						if (result && result["status"]) {
+
+							if(result["status"] == "SUCCESS"){
+
+								setBookingStatus("booking");
+								showBookingProgress("Booking in progress. Please wait..");
+								// _isERPFlow = true;
+								_mode = "SBT";
+
+								if(result["is_already_booked"]){
+
+									//code before the pause
+									setTimeout(function(){
+
+										setBookingStatus("confirm");
+										showBookingProgress("Confirming the flight. Please wait...", false);
+
+										//hideBookingProgress();
+
+										//showSelfBookingConfirmation(result['status'],result['message'],result['filePath']);
+
+										root['book_response'] = result;
+
+										if(!_isERPFlow)
+											_mode = "ERP"
+
+										onAirBookByObject(root,"confirmation");
+
+
+									}, 2000);
+
+								}else{
+
+									onAirBookByObject(root,"booking");
+
+								}
+
+
+
+							}else if(result["message"]){
+
+								setBookingStatus(result["status"]);
+								showBookingProgress(result["message"], false, result);
+
+							}
+
+						}
+					}
+				});
+			}else{
+
+				alert("Service Provider is not available to book.");
+
+			}
+		}
+
+		//}
+
+	}
+</script>
+
+
+</head>
+
+
+<body>
+
+	<div class="header-container">
+		<div class="container">
+
+			<div class="row p15-r-l">
+				<div class="col-xs-6">
+					<!-- <img src="../../images/mphasisLogoNew.png" height="48"> -->
+					<h4 class="logo-style">Project Logo</h4>
+				</div>
+				<div class="col-xs-6">
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="navbar-wrapper">
+		<nav class="navbar navbar-inverse-blue navbar-static-top margin-b-0">
+			<div class="container">
+
+				<div class="navbar-header">
+					<!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
+					<!--  <a class="navbar-brand" href="#">Project name</a> -->
+				</div>
+				<!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
+				<div id="navbar">
+					<ul class="nav navbar-nav">
+						<li><a href="#"><i class="glyphicon glyphicon-home"></i>
+								Home</a></li>
+						<!--
+            <li><a href="#contact">Contact</a></li> -->
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-expanded="false"><i
+								class="glyphicon glyphicon-user"></i> Dropdown <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header p-r-l-5">Nav header</li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul></li>
+						<li><a href="#"><i class="glyphicon glyphicon-duplicate"></i>
+								Menu 2</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-duplicate"></i>
+								Menu 3</a></li>
+					</ul>
+
+
+
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+	</div>
+
+
+
+
+	<div id='status-msg-0' style="display: none">
+	</div>
+
+	<div id='existing-trips-div' style="display: none; width: 700px">
+	</div>
+
+	<!-- Carousel
+    ================================================== -->
+	<div id="myCarousel" class="carousel slide container-fluid p-l-0 p-r-0">
+		<!-- Indicators -->
+		<ol class="carousel-indicators hidden">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+
+			<div id="bgImg" class="item active">
+				<div class="bg-img"
+					 style="background: /* url(web/images/bg-0-12.jpg) */ url(http://johannesburg-airport.co.za/wp-content/uploads/2016/03/airplane-wallpaper-3.jpg) center; height: 600px; background-size: cover;">
+					<div class="container">
+						<div class="carousel-caption"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="container" id="searchForm">
+
+			<div id="searchPanel" class="panel panel-accordion-drak margin-b-2">
+
+				<div id="resultHeader" class="panel-heading padding-0 hidden">
+
+					<div class="col-xs-offset-2 col-xs-8 p-l-0 p-r-0 text-center" id="segmentHeader">
+						<!-- <h4 class="panel-title">BLR &rarr; LHR</h4>
+						<p class="margin-b-0">Tue, 26 Apr - Mon, 02 May | 1 adult</p> -->
+					</div>
+					<div class="col-xs-2 p-l-0 text-right">
+						<h4 class="panel-title p9">
+							<a class="btn btn-primary btn-ep-gray btn-xs white-color" id="modifySearchBtn"
+							   data-toggle="collapse" href="#" onclick="openSearchDiv()"
+							   aria-expanded="true">SEARCH FLIGHTS</a>
+						</h4>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="panel-collapse collapse in" id="panel-body-search-div"
+					 role="tabpanel" aria-expanded="true">
+
+
+					<div class="panel-body">
+
+						<div id='search-div'>
+
+							<div>
+
+								<label style="font-weight: bold;" class="radio-inline font14">
+									<input type="radio" checked="checked" class=" " value="1"
+										   name="One way" id="opt_oneway" onclick="onClickOneWay()">One
+									Way
+								</label> <label style="font-weight: bold;"
+												class="radio-inline font14 m-l-35"> <input type="radio"
+																						   class="" value="2" name="Round trip" id="opt_roundtrip"
+																						   onclick='onClickReturn()'>Round Trip
+							</label> <label style="font-weight: bold;"
+											class="radio-inline font14 m-l-35"> <input type="radio"
+																					   class="" value="2" name="Multi city" id="opt_multicity"
+																					   onclick='onClickMultiCity()'>Multi-City
+							</label> <input type="hidden" id='request-id' />
+								<input type="hidden" id='trip-request-id' />
+								<input type="hidden" id='service-id' />
+								<input type="hidden" id='multicity-id' />
+								<input type="hidden" id='traveller-id' />
+							</div>
+							<div class="margin-b-20"></div>
+
+							<div class="col-xs-12 p-l-0 p-r-0" id='search-table' ></div>
+							<div class="col-xs-12 p-l-0 p-r-0" id='search-table-2'></div>
+
+							<div class="col-xs-12 p-l-0 p-r-0" id='search-table-4'>
+
+							</div>
+
+							<div class="col-xs-12 p-l-0 p-r-0" id='search-table-3'></div>
+
+							<div class="col-xs-12 p-l-0 p-r-0" id='search-addcity-table' >
+
+							</div>
+
+
+
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+		<!-- Controls -->
+		<a class="left carousel-control hidden" href="#myCarousel"
+		   data-slide="prev"> <i class="glyphicon glyphicon-chevron-left"></i>
+		</a> <a class="right carousel-control hidden" href="#myCarousel"
+				data-slide="next"> <i class="glyphicon glyphicon-chevron-right"></i>
+	</a>
+	</div>
+	<!-- /.carousel -->
+
+
+
+	<div id="resultContainer" class="container hidden">
+
+
+		<div class="row p15-r-l">
+
+			<div class="col-xs-2 add-xs-2_5 p-l-0 m-h660">
+
+				<div class="panel panel-default border-r" >
+
+					<div class="panel-heading p-t-5 p-b-5">
+						<button class="btn-link pull-right p-r-0" onclick="clearFilter();">Clear</button>
+						<h4 class="panel-title">FILTER</h4>
+					</div>
+
+					<div class="panel-body padding-0">
+
+
+						<ul class="list-group">
+							<li class="list-group-item border-left-0 border-right-0 border-top-0 border-bottom-0">
+								<a class="pull-right hidden" onclick="" href="#">Reset</a>
+								<div class="">No. of Stops</div>
+
+								<div class="btn-group btn-group-justified m-t-b-10" role="group">
+
+
+									<div class="btn-group" role="group">
+										<button type="button" class="btn btn-xs btn-default"
+												data-toggle="button" id="total_stop_0" data-selected="0"
+												data-value="0" onclick="filterByStops(this);">0</button>
+									</div>
+									<div class="btn-group" role="group">
+										<button type="button" class="btn btn-xs btn-default"
+												data-toggle="button" id="total_stop_1" data-selected="0"
+												data-value="1" onclick="filterByStops(this);">1</button>
+									</div>
+									<div class="btn-group" role="group">
+										<button type="button" class="btn btn-xs btn-default"
+												data-toggle="button" id="total_stop_2" data-selected="0"
+												data-value="2" onclick="filterByStops(this);">2</button>
+									</div>
+									<div class="btn-group" role="group">
+										<button type="button" class="btn btn-xs btn-default"
+												data-toggle="button" id="total_stop_3" data-selected="0"
+												data-value="3" onclick="filterByStops(this);">3</button>
+									</div>
+								</div>
+
+							</li>
+							<li class="list-group-item border-left-0 border-right-0 border-bottom-0">
+
+								<div id="div_currency"
+									 style="position: relative; float: right; display: block;">
+									<label id="selected_currency_lbl" class="currency_lbl"
+										   style:"float:right;"=""></label> <input type="hidden"
+																				   id="selected_currency_lbl_hidden">
+
+									<div id="currency_container"
+										 class="cus_model currency_container_div" style="display: none;"></div>
+
+									<div class="overlay" style="display: none;"></div>
+								</div>
+
+								<a class="pull-right hidden" onclick="" href="#">Reset</a>
+								<div class="">Price</div>
+
+
+
+
+								<div class="m-t-b-10">
+									<div id="slider-range" style="margin:8px 0 8px 0px;"></div>
+									<input type="text" id="amount" class="form-control input-xs" readonly />
+								</div>
+
+							</li>
+							<li class="list-group-item border-left-0 border-right-0 border-bottom-0">
+
+
+
+								<a class="pull-right hidden" onclick="" href="#">Reset</a>
+								<div class="">Airlines</div>
+
+								<div class="m-t-b-10">
+
+									<input
+											type="text" class="form-control input-xs" id="filterAirLineName"
+											filterby="title" placeholder="E.g : Jet Airways"
+											onfocus="this.placeholder = ''"
+											onblur="this.placeholder = 'E.g : Jet Airways'">
+
+									<!-- <div class="checkbox">
+                                      <label class="l-h-20">
+                                        <input type="checkbox" value="">
+                                        Airline name
+                                      </label>
+                                    </div>
+                                    <div class="checkbox">
+                                      <label class="l-h-20">
+                                        <input type="checkbox" value="">
+                                        Airline name
+                                      </label>
+                                    </div> -->
+
+								</div>
+
+
+							</li>
+
+						</ul>
+
+
+						<!-- <div class="form-group m-b-10">
+                            <label for="filterAirLineName" class="m-b-0">Air Line</label> <input
+                                type="text" class="form-control input-xs" id="filterAirLineName"
+                                filterby="title" placeholder="E.g : Jet Airways"
+                                onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'E.g : Jet Airways'">
+                        </div>
+
+                        <div class="form-group m-b-10">
+
+                            <div id="div_currency"
+                                style="position: relative; float: right; display: block;">
+                                <label id="selected_currency_lbl" class="currency_lbl"
+                                    style:"float:right;"=""></label> <input type="hidden"
+                                    id="selected_currency_lbl_hidden">
+
+                                <div id="currency_container"
+                                    class="cus_model currency_container_div" style="display: none;"></div>
+
+                                <div class="overlay" style="display: none;"></div>
+                            </div>
+
+                            <label for="nameFilterTextElem" class="m-b-0">Price</label>
+
+
+                                <div id="slider-range" style="margin: 8px 0 15px 8px;"></div>
+                                <input type="text" id="amount" class="form-control input-xs" readonly />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nameFilterTextElem" class="m-b-0">Stops</label>
+                        </div>
+                        <div class="btn-group btn-group-justified m-b-10" role="group">
+
+
+
+                            <div class="btn-group" role="group">
+                                <button  type="button" class="btn btn-xs btn-default" data-toggle="button" id="total_stop_0" data-selected="0" data-value="0" onclick="filterByStops(this);">0</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-xs btn-default" data-toggle="button" id="total_stop_1" data-selected="0" data-value="1" onclick="filterByStops(this);">1</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-xs btn-default" data-toggle="button" id="total_stop_2" data-selected="0" data-value="2" onclick="filterByStops(this);">2</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-xs btn-default" data-toggle="button" id="total_stop_3" data-selected="0" data-value="3"onclick="filterByStops(this);">3</button>
+                            </div>
+                        </div> -->
+
+
+
+
+
+
+
+					</div>
+				</div>
+
+			</div>
+			<div class="col-xs-9 add-xs-9_5 p-l-0 p-r-0">
+
+				<div class="col-xs-12 p-l-0 p-r-0">
+					<div id="selected_hotels_template" style="display:none"
+						 class="float-container-selected affix" data-spy="affix"
+						 data-offset-top="250" style="">
+
+						<div class="panel panel-default panel-theme-default border-r margin-b-2  border-shadow-alpha-5">
+
+							<div class="panel-heading hidden">
+								<h4 class="panel-title">SELECTED FLIGHTS</h4>
+							</div>
+
+
+							<div class="panel-body margin-0 padding-0">
+
+								<div id="seleted_entities_list"></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-xs-12 p-l-0 p-r-0">
+
+					<div id="search_progress" title="Progress" style="display: none;"
+						 align="center">
+						<div style="font-size: 8pt;" align="center">Search in
+							progress. Please wait..</div>
+						<div style="padding-top: 15px" align="center">
+							<img style="vertical-align: bottom;" src="web/images/loading.gif"></img>
+						</div>
+					</div>
+
+					<div id="searching-dialog" title="Searching Flights" class="border-r-4" style="display: none;">
+
+
+						<div class="col-xs-12 m-b-10 text-center">
+							<h5 class="">Searching for the best Flights</h5>
+							<p class="margin-0 color-drakgray m-b-10" id="traveller_details"></p>
+						</div>
+						<div class="row p15 margin-r-l-0">
+
+
+							<div class="col-xs-12 m-b-10">
+
+								<div class="progress">
+									<div id="progress-bar-status"
+										 class="progress-bar progress-bar-success progress-bar-striped active"
+										 role="progressbar" aria-valuenow="0" aria-valuemin="0"
+										 aria-valuemax="100" style="width:0%">
+										<span class="sr-only">0% Complete</span>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-xs-4">
+								<h4 class="" id="depart_city_code_ui"></h4>
+								<p class="margin-0 color-drakgray" id="depart_city_name_ui">--</p>
+							</div>
+							<div class="col-xs-4 text-center">
+								<h5 class="p-t-10" id="travel_date">&mdash; 24 Dec 2016 &rarr;</h5>
+
+							</div>
+							<div class="col-xs-4 text-right">
+								<h4 class="" id="arrival_city_code_ui"></h4>
+								<p class="margin-0 color-drakgray" id="arrival_city_name_ui">--</p>
+							</div>
+
+
+						</div>
+
+
+
+					</div>
+
+					<div id="confirm_progress" title="Progress" style="display: none;"
+						 align="center">
+						<div style="font-size: 8pt;" align="center">Booking in
+							progress. Please wait..</div>
+						<div style="padding-top: 15px" align="center">
+							<img style="vertical-align: bottom;" src="web/images/loading.gif"></img>
+						</div>
+					</div>
+
+					<!-- <div id="booking-progress" title="Progress" style="display: none;"
+                        align="center">
+                        <div style="font-size: 8pt;" align="center">
+                            <label id = 'booking-progress-label'></label>
+                        </div>
+                        <div style="padding-top: 15px" align="center">
+                            <img style="vertical-align: bottom;" src="web/images/loading.gif"></img>
+                        </div>
+                    </div> -->
+					<div id="refresh_progress" title="Progress" style="display: none;"
+						 align="center">
+						<div style="font-size: 8pt;" align="center">Refresh in
+							progress. Please wait..</div>
+						<div style="padding-top: 15px" align="center">
+							<img style="vertical-align: bottom;" src="web/images/loading.gif"></img>
+						</div>
+					</div>
+					<div id="progress" title="Progress" style="display: none;"
+						 align="center">
+						<div style="font-size: 8pt;" align="center">Booking in
+							progress. Please wait..</div>
+						<div style="padding-top: 15px" align="center">
+							<img style="vertical-align: bottom;" src="web/images/loading.gif"></img>
+						</div>
+					</div>
+
+					<div id="deviation_progress" title="Deviation Request"
+						 style="display: none;" align="center">
+						<div style="font-size: 8pt;" align="center">Deviation request
+							is being created. Please wait..</div>
+						<div style="padding-top: 15px" align="center">
+							<img style="vertical-align: bottom;" src="web/images/loading.gif"></img>
+						</div>
+					</div>
+
+					<div id="assist_progress" title="Assisted booking request"
+						 style="display: none;" align="center">
+						<div style="font-size: 8pt;" align="center">Booking request
+							being created. Please wait..</div>
+						<div style="padding-top: 15px" align="center">
+							<img style="vertical-align: bottom;" src="web/images/loading.gif"></img>
+						</div>
+					</div>
+					<div id="div_mask" width="100%">
+
+						<div id="segments_multicity" class="hidden">
+
+							<!-- Left and right controls -->
+							<div id="multiCityCarousel">
+
+
+
+								<div class="col-xs-12 p-r-0 p-l-0">
+									<div class="multi-city-list p-r-l-2">
+										<ul id="multi-city-section" class="list-inline" style="position:relative;">
+											<li>
+												<div class="w409 pull-left">
+
+
+													<div id="multi-sortBy_BLR_PNQ_O"
+														 class="col-xs-12 active p-l-0 p-r-0">
+														<div>
+															<div class="panel panel-default margin-b-0 border-r">
+																<div
+																		class="panel-heading panel-heading-default p-l-5 p-r-5 p-t-b-0">
+																	<div class="col-xs-9 p-l-0 p-r-0">
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showAirLineWise(this)" parent-id="BLR_PNQ_O">Airline
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showDepartWise(this)" parent-id="BLR_PNQ_O">Depart
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showArriveWise(this)" parent-id="BLR_PNQ_O">Arrive
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showDurationWise(this)" parent-id="BLR_PNQ_O">Duration
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0">
+																		<div class="col-xs-12 p-l-0 p-r-0 text-right">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showPriceWise(this);" parent-id="BLR_PNQ_O">Price
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="clearfix"></div>
+																</div>
+															</div>
+														</div>
+														<div id="multi-BLR_PNQ_O" class="col-xs-12 p-l-0 p-r-0">
+															<div class="col-xs-12 p-l-0 p-r-0" pr="3951" airn="IndiGo"
+																 dep="00:15" arr="01:30" dura="1h 15m" id="GOIBIBO_100">
+																<div
+																		class="panel panel-accordion-default margin-b-2 border-r air"
+																		onclick="toggleSelection(GOIBIBO_100)">
+																	<div>
+																		<div class="border-bottom">
+																			<div class="panel-heading padding-0">
+																		<span class="tick_mark_holder"><span
+																				class="tick_mark"></span><span
+																				class="tick_mark_icon glyphicon glyphicon-ok white-color"></span></span>
+																				<div class="row margin-r-l-0">
+																					<div class="hover col-xs-9 p10 p-b-0 border-rgt">
+																						<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																							<img class="airline_img margin-r-4"
+																								 src="./images/flight-images/6E.png">
+																							<p class="margin-b-0 p-r-4">
+																								IndiGo<br>
+																								<span> 6E-682</span>
+																							</p>
+																						</div>
+																						<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+																							<div class="col-xs-6 p-l-0 p-r-0">
+																								<h5 class="margin-t-0 margin-b-5">00:15</h5>
+																							</div>
+																							<div class="col-xs-6 p-l-0 p-r-0">
+																								<h5 class="margin-t-0 margin-b-5">01:30</h5>
+																							</div>
+																							<div class="col-xs-12 p-l-0 p-r-0">
+																								<p class="font10 color-drakgray">BLR &rarr; PNQ</p>
+																							</div>
+																						</div>
+																						<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																							<h5 class="margin-t-0 margin-b-5">1h 15m</h5>
+																							<p class="font10 color-drakgray">Non-Stop</p>
+																						</div>
+																						<div
+																								class="col-xs-12 p-l-0 p-r-0 text-center m-t-15">
+																							<a
+																									class="btn-default-itinerary btn btn-default btn-xxs collapsed"
+																									id="tab-flight-iti-GOIBIBO_100-0"
+																									data-id="flight-iti-GOIBIBO_100-0"
+																									onclick="toggleTabs(this,GOIBIBO_100,0)"
+																									href="javascript:void(0);">Flight itinerary
+																								details</a>
+																						</div>
+																					</div>
+																					<div class="col-xs-3 p-t-10 p-r-10 p-b-0 text-right">
+																						<img class="h14" src="images/goibibo.png"
+																							 id="provider_GOIBIBO_100" alt="GOIBIBO"
+																							 data-provider="GOIBIBO">
+																						<h3 class="panel-title p-t-b-5"
+																							id="price_GOIBIBO_100" data-price="3951">INR
+																							3951.00</h3>
+																						<button class="btn btn-primary btn-xs"
+																								onclick="onAirBook(GOIBIBO_100)">Select</button>
+																						<div class="m-t-b-10">
+																							<a href="javascript:void(0);" id="a_GOIBIBO_100"
+																							   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+																							   title="">Fare Details</a>
+
+																						</div>
+																					</div>
+																				</div>
+																				<div class="panel-collapse collapse"
+																					 id="flight-iti-GOIBIBO_100-0" role="tabpanel"
+																					 aria-expanded="false" style="height: 0px;">
+																					<div class="panel-body p10">
+																						<div class="row margin-r-l-0">
+																							<div class="col-xs-9">
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<img class="airline_img"
+																										 src="./images/flight-images/6E.png">
+																									<p>6E-682</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">00:15</h5>
+																									<p class="font10 color-drakgray">BLR &rarr; PNQ</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">01:30</h5>
+																									<p class="font10 color-drakgray">Tue, 18 Apr
+																										2017</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">1h 15m</h5>
+																									<p class="font10 color-drakgray">Non Stop</p>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="panel-collapse collapse"
+																				 id="compare-provider-GOIBIBO_100-0" role="tabpanel"
+																				 aria-expanded="false">
+																				<div class="panel-body p10">Content</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+
+
+												</div>
+											</li>
+											<li>
+												<div class="w409 pull-left">
+
+													<div id="multi-sortBy_BLR_PNQ_O" class="col-xs-12 active p-l-0 p-r-0">
+														<div>
+															<div class="panel panel-default margin-b-0 border-r">
+																<div class="panel-heading panel-heading-default p-l-5 p-r-5 p-t-b-0">
+																	<div class="col-xs-9 p-l-0 p-r-0">
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showAirLineWise(this)" parent-id="BLR_PNQ_O">Airline
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showDepartWise(this)" parent-id="BLR_PNQ_O">Depart
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showArriveWise(this)" parent-id="BLR_PNQ_O">Arrive
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showDurationWise(this)" parent-id="BLR_PNQ_O">Duration
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0">
+																		<div class="col-xs-12 p-l-0 p-r-0 text-right">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showPriceWise(this);" parent-id="BLR_PNQ_O">Price
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="clearfix"></div>
+																</div>
+															</div>
+														</div>
+														<div id="multi-BLR_PNQ_O" class="col-xs-12 p-l-0 p-r-0">
+															<div class="col-xs-12 p-l-0 p-r-0" pr="3951" airn="IndiGo"
+																 dep="00:15" arr="01:30" dura="1h 15m" id="GOIBIBO_100">
+																<div
+																		class="panel panel-accordion-default margin-b-2 border-r air"
+																		onclick="toggleSelection(GOIBIBO_100)">
+																	<div>
+																		<div class="border-bottom">
+																			<div class="panel-heading padding-0">
+																		<span class="tick_mark_holder"><span
+																				class="tick_mark"></span><span
+																				class="tick_mark_icon glyphicon glyphicon-ok white-color"></span></span>
+																				<div class="row margin-r-l-0">
+																					<div class="hover col-xs-9 p10 p-b-0 border-rgt">
+																						<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																							<img class="airline_img margin-r-4"
+																								 src="./images/flight-images/6E.png">
+																							<p class="margin-b-0 p-r-4">
+																								IndiGo<br>
+																								<span> 6E-682</span>
+																							</p>
+																						</div>
+																						<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+																							<div class="col-xs-6 p-l-0 p-r-0">
+																								<h5 class="margin-t-0 margin-b-5">00:15</h5>
+																							</div>
+																							<div class="col-xs-6 p-l-0 p-r-0">
+																								<h5 class="margin-t-0 margin-b-5">01:30</h5>
+																							</div>
+																							<div class="col-xs-12 p-l-0 p-r-0">
+																								<p class="font10 color-drakgray">BLR &rarr; PNQ</p>
+																							</div>
+																						</div>
+																						<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																							<h5 class="margin-t-0 margin-b-5">1h 15m</h5>
+																							<p class="font10 color-drakgray">Non-Stop</p>
+																						</div>
+																						<div
+																								class="col-xs-12 p-l-0 p-r-0 text-center m-t-15">
+																							<a
+																									class="btn-default-itinerary btn btn-default btn-xxs collapsed"
+																									id="tab-flight-iti-GOIBIBO_100-0"
+																									data-id="flight-iti-GOIBIBO_100-0"
+																									onclick="toggleTabs(this,GOIBIBO_100,0)"
+																									href="javascript:void(0);">Flight itinerary
+																								details</a>
+																						</div>
+																					</div>
+																					<div class="col-xs-3 p-t-10 p-r-10 p-b-0 text-right">
+																						<img class="h14" src="images/goibibo.png"
+																							 id="provider_GOIBIBO_100" alt="GOIBIBO"
+																							 data-provider="GOIBIBO">
+																						<h3 class="panel-title p-t-b-5"
+																							id="price_GOIBIBO_100" data-price="3951">INR
+																							3951.00</h3>
+																						<button class="btn btn-primary btn-xs"
+																								onclick="onAirBook(GOIBIBO_100)">Select</button>
+																						<div class="m-t-b-10">
+																							<a href="javascript:void(0);" id="a_GOIBIBO_100"
+																							   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+																							   title="">Fare Details</a>
+
+																						</div>
+																					</div>
+																				</div>
+																				<div class="panel-collapse collapse"
+																					 id="flight-iti-GOIBIBO_100-0" role="tabpanel"
+																					 aria-expanded="false" style="height: 0px;">
+																					<div class="panel-body p10">
+																						<div class="row margin-r-l-0">
+																							<div class="col-xs-9">
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<img class="airline_img"
+																										 src="./images/flight-images/6E.png">
+																									<p>6E-682</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">00:15</h5>
+																									<p class="font10 color-drakgray">BLR &rarr; PNQ</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">01:30</h5>
+																									<p class="font10 color-drakgray">Tue, 18 Apr
+																										2017</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">1h 15m</h5>
+																									<p class="font10 color-drakgray">Non Stop</p>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="panel-collapse collapse"
+																				 id="compare-provider-GOIBIBO_100-0" role="tabpanel"
+																				 aria-expanded="false">
+																				<div class="panel-body p10">Content</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</li>
+											<li>
+												<div class="w409 pull-left">
+
+													<div id="multi-sortBy_BLR_PNQ_O"
+														 class="col-xs-12 active p-l-0 p-r-0">
+														<div>
+															<div class="panel panel-default margin-b-0 border-r">
+																<div
+																		class="panel-heading panel-heading-default p-l-5 p-r-5 p-t-b-0">
+																	<div class="col-xs-9 p-l-0 p-r-0">
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showAirLineWise(this)" parent-id="BLR_PNQ_O">Airline
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showDepartWise(this)" parent-id="BLR_PNQ_O">Depart
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showArriveWise(this)" parent-id="BLR_PNQ_O">Arrive
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																		<div class="col-xs-3 p-l-0 p-r-0">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showDurationWise(this)" parent-id="BLR_PNQ_O">Duration
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0">
+																		<div class="col-xs-12 p-l-0 p-r-0 text-right">
+																			<a class="btn btn-link btn-xxs p-t-b-5 p-l-0 p-r-0"
+																			   href="javascript:void(0);"
+																			   onclick="showPriceWise(this);" parent-id="BLR_PNQ_O">Price
+																				<i class="fa fa-sort hidden" aria-hidden="true"></i>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="clearfix"></div>
+																</div>
+															</div>
+														</div>
+														<div id="multi-BLR_PNQ_O" class="col-xs-12 p-l-0 p-r-0">
+															<div class="col-xs-12 p-l-0 p-r-0" pr="3951" airn="IndiGo"
+																 dep="00:15" arr="01:30" dura="1h 15m" id="GOIBIBO_100">
+																<div
+																		class="panel panel-accordion-default margin-b-2 border-r air"
+																		onclick="toggleSelection(GOIBIBO_100)">
+																	<div>
+																		<div class="border-bottom">
+																			<div class="panel-heading padding-0">
+																		<span class="tick_mark_holder"><span
+																				class="tick_mark"></span><span
+																				class="tick_mark_icon glyphicon glyphicon-ok white-color"></span></span>
+																				<div class="row margin-r-l-0">
+																					<div class="hover col-xs-9 p10 p-b-0 border-rgt">
+																						<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																							<img class="airline_img margin-r-4"
+																								 src="./images/flight-images/6E.png">
+																							<p class="margin-b-0 p-r-4">
+																								IndiGo<br>
+																								<span> 6E-682</span>
+																							</p>
+																						</div>
+																						<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+																							<div class="col-xs-6 p-l-0 p-r-0">
+																								<h5 class="margin-t-0 margin-b-5">00:15</h5>
+																							</div>
+																							<div class="col-xs-6 p-l-0 p-r-0">
+																								<h5 class="margin-t-0 margin-b-5">01:30</h5>
+																							</div>
+																							<div class="col-xs-12 p-l-0 p-r-0">
+																								<p class="font10 color-drakgray">BLR &rarr; PNQ</p>
+																							</div>
+																						</div>
+																						<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																							<h5 class="margin-t-0 margin-b-5">1h 15m</h5>
+																							<p class="font10 color-drakgray">Non-Stop</p>
+																						</div>
+																						<div
+																								class="col-xs-12 p-l-0 p-r-0 text-center m-t-15">
+																							<a
+																									class="btn-default-itinerary btn btn-default btn-xxs collapsed"
+																									id="tab-flight-iti-GOIBIBO_100-0"
+																									data-id="flight-iti-GOIBIBO_100-0"
+																									onclick="toggleTabs(this,GOIBIBO_100,0)"
+																									href="javascript:void(0);">Flight itinerary
+																								details</a>
+																						</div>
+																					</div>
+																					<div class="col-xs-3 p-t-10 p-r-10 p-b-0 text-right">
+																						<img class="h14" src="images/goibibo.png"
+																							 id="provider_GOIBIBO_100" alt="GOIBIBO"
+																							 data-provider="GOIBIBO">
+																						<h3 class="panel-title p-t-b-5"
+																							id="price_GOIBIBO_100" data-price="3951">INR
+																							3951.00</h3>
+																						<button class="btn btn-primary btn-xs"
+																								onclick="onAirBook(GOIBIBO_100)">Select</button>
+																						<div class="m-t-b-10">
+																							<a href="javascript:void(0);" id="a_GOIBIBO_100"
+																							   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+																							   title="">Fare Details</a>
+
+																						</div>
+																					</div>
+																				</div>
+																				<div class="panel-collapse collapse"
+																					 id="flight-iti-GOIBIBO_100-0" role="tabpanel"
+																					 aria-expanded="false" style="height: 0px;">
+																					<div class="panel-body p10">
+																						<div class="row margin-r-l-0">
+																							<div class="col-xs-9">
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<img class="airline_img"
+																										 src="./images/flight-images/6E.png">
+																									<p>6E-682</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">00:15</h5>
+																									<p class="font10 color-drakgray">BLR &rarr; PNQ</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">01:30</h5>
+																									<p class="font10 color-drakgray">Tue, 18 Apr
+																										2017</p>
+																								</div>
+																								<div class="col-xs-3 p-l-0 p-r-0 margin-t-0">
+																									<h5 class="margin-t-0 margin-b-5">1h 15m</h5>
+																									<p class="font10 color-drakgray">Non Stop</p>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="panel-collapse collapse"
+																				 id="compare-provider-GOIBIBO_100-0" role="tabpanel"
+																				 aria-expanded="false">
+																				<div class="panel-body p10">Content</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</li>
+										</ul>
+
+									</div>
+
+									<a id="scrollLeft" class="left carousel-control w5p" href="javascript:;" role="button" style="display:none;">
+										<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+									</a>
+									<a id="scrollRight" class="right carousel-control w5p" href="javascript:;" role="button" style="display:none;">
+										<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+
+									</a>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="hidden">
+							<div class="col-xs-12 p-l-0 p-r-0">
+								<div
+										class="panel panel-accordion-default margin-b-5 border-r air">
+									<div class="panel-heading padding-0">
+									<span class="tick_mark_holder"> <span class="tick_mark"></span>
+										<span
+												class="tick_mark_icon glyphicon glyphicon-ok white-color"></span>
+									</span>
+
+										<div class="row margin-r-l-0">
+
+											<div class="hover col-xs-9 p10 p-b-0 border-rgt">
+
+												<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<img class="airline_img" src="./images/flight-images/EY.png">
+													<p>Airline name</p>
+												</div>
+												<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+													<div class="col-xs-6 p-l-0 p-r-0">
+														<h4 class="margin-t-0">18:00</h4>
+
+													</div>
+													<div class="col-xs-6 p-l-0 p-r-0">
+														<h4 class="margin-t-0">24:32</h4>
+
+													</div>
+													<div class="col-xs-12 p-l-0 p-r-0">
+														<p class="">DEL &rarr; LGA</p>
+													</div>
+
+												</div>
+
+												<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<h4 class="margin-t-0">12h</h4>
+													<p class="">non-stop</p>
+												</div>
+												<div class="col-xs-12 p-l-0 p-r-0 text-center">
+													<a
+															class="btn-flight-itinerary btn btn-link btn-xxs collapsed"
+															data-toggle="collapse" data-parent="#data-cell-div"
+															href="#trip-no-00-1">Flight itinerary details</a>
+												</div>
+											</div>
+
+
+											<div class="col-xs-3 p10 text-right">
+												<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+												<button class="btn btn-primary btn-xs">Book</button>
+												<div>
+													<a href="#" class="btn btn-link btn-xxs p-r-0 p-l-0"
+													   data-placement="bottom" data-html="true"
+													   data-toggle="popover" title="Fare details"
+													   data-content="Some content inside the popover">Toggle
+														popover</a>
+												</div>
+
+
+
+											</div>
+										</div>
+
+									</div>
+									<div class="panel-collapse collapse" id="trip-no-00-1"
+										 role="tabpanel">
+										<div class="panel-body p10">
+											<div class="row margin-r-l-0">
+
+												<div class="col-xs-12 ">
+													<h5 class="m-t-b-0">
+														New Delhi <i class="fa fa-long-arrow-right"></i> New York,
+														United States <span class="medium"> 02 May 2016 </span>
+													</h5>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>--</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">DEL &rarr; LGA</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">02 May 2016</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">--</p>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-accordion-default margin-b-5 border-r">
+									<div class="panel-heading padding-0">
+
+										<div class="row margin-r-l-0">
+											<a class="collapsed" data-toggle="collapse"
+											   data-parent="#data-cell-div" href="#trip-no-00-2">
+												<div class="hover col-xs-9 p10 border-rgt">
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>Jet Airways</p>
+													</div>
+													<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">18:00</h4>
+
+														</div>
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">24:32</h4>
+
+														</div>
+														<div class="col-xs-12 p-l-0 p-r-0">
+															<p class="">DEL &rarr; LGA</p>
+														</div>
+
+													</div>
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0">12h</h4>
+														<p class="">1-stop</p>
+													</div>
+
+												</div>
+											</a>
+											<div class="col-xs-3 p10 text-right">
+												<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+												<button class="btn btn-primary btn-xs">Book</button>
+												<div>
+													<a href="#"
+													   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+													   title="Fare details">Fare Details</a>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+									<div class="panel-collapse collapse" id="trip-no-00-2"
+										 role="tabpanel">
+										<div class="panel-body p10">
+											<div class="row margin-r-l-0">
+
+												<div class="col-xs-12">
+													<h5 class="m-t-b-0">
+														New Delhi <i class="fa fa-long-arrow-right"></i> New York,
+														United States <span class="medium"> 02 May 2016 </span>
+													</h5>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>Airline</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">DEL &rarr; LGA</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">02 May 2016</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">--</p>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div
+										class="panel panel-accordion-default margin-b-5 border-r selected_air">
+									<div class="panel-heading padding-0">
+									<span class="tick_mark_holder"> <span class="tick_mark"></span>
+										<span
+												class="tick_mark_icon glyphicon glyphicon-ok white-color"></span>
+									</span>
+
+										<div class="row margin-r-l-0">
+											<a class="collapsed" data-toggle="collapse"
+											   data-parent="#data-cell-div" href="#trip-no-0-1">
+												<div class="hover col-xs-9 p10 border-rgt">
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<img class="airline_img"
+															 src="./images/flight-images/EY.png">
+														<p>Airline name</p>
+													</div>
+													<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">18:00</h4>
+
+														</div>
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">24:32</h4>
+
+														</div>
+														<div class="col-xs-12 p-l-0 p-r-0">
+															<p class="">DEL &rarr; LGA</p>
+														</div>
+
+													</div>
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0">12h</h4>
+														<p class="">non-stop</p>
+													</div>
+
+												</div>
+											</a>
+											<div class="col-xs-3 p10 text-right">
+												<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+												<button class="btn btn-primary btn-xs">Book</button>
+												<div>
+													<a href="#" class="btn btn-link btn-xxs p-r-0 p-l-0"
+													   data-placement="bottom" data-html="true"
+													   data-toggle="popover" title="Fare details"
+													   data-content="Some content inside the popover">Toggle
+														popover</a>
+												</div>
+
+
+
+											</div>
+										</div>
+
+									</div>
+									<div class="panel-collapse collapse" id="trip-no-0-1"
+										 role="tabpanel">
+										<div class="panel-body p10">
+											<div class="row margin-r-l-0">
+
+												<div class="col-xs-12">
+													<h5 class="m-t-b-0">
+														New Delhi <i class="fa fa-long-arrow-right"></i> New York,
+														United States <span class="medium"> 02 May 2016 </span>
+													</h5>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>--</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">DEL &rarr; LGA</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">02 May 2016</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">--</p>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-accordion-default margin-b-5 border-r">
+									<div class="panel-heading padding-0">
+
+										<div class="row margin-r-l-0">
+											<a class="collapsed" data-toggle="collapse"
+											   data-parent="#data-cell-div" href="#trip-no-0-2">
+												<div class="hover col-xs-9 p10 border-rgt">
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>Jet Airways</p>
+													</div>
+													<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">18:00</h4>
+
+														</div>
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">24:32</h4>
+
+														</div>
+														<div class="col-xs-12 p-l-0 p-r-0">
+															<p class="">DEL &rarr; LGA</p>
+														</div>
+
+													</div>
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0">12h</h4>
+														<p class="">1-stop</p>
+													</div>
+
+												</div>
+											</a>
+											<div class="col-xs-3 p10 text-right">
+												<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+												<button class="btn btn-primary btn-xs">Book</button>
+												<div>
+													<a href="#"
+													   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+													   title="Fare details">Fare Details</a>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+									<div class="panel-collapse collapse" id="trip-no-0-2"
+										 role="tabpanel">
+										<div class="panel-body p10">
+											<div class="row margin-r-l-0">
+
+												<div class="col-xs-12">
+													<h5 class="m-t-b-0">
+														New Delhi <i class="fa fa-long-arrow-right"></i> New York,
+														United States <span class="medium"> 02 May 2016 </span>
+													</h5>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>Airline</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">DEL &rarr; LGA</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">02 May 2016</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">--</p>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="panel panel-accordion-default margin-b-5 border-r">
+									<div class="panel-heading padding-0">
+
+										<div class="row margin-r-l-0">
+											<a class="collapsed" data-toggle="collapse"
+											   data-parent="#data-cell-div" href="#trip-no-0-2">
+												<div class="hover col-xs-9 p10 border-rgt">
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>Jet Airways</p>
+													</div>
+													<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">18:00</h4>
+
+														</div>
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">24:32</h4>
+
+														</div>
+														<div class="col-xs-12 p-l-0 p-r-0">
+															<p class="">DEL &rarr; LGA</p>
+														</div>
+
+													</div>
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0">12h</h4>
+														<p class="">1-stop</p>
+													</div>
+
+												</div>
+											</a>
+											<div class="col-xs-3 p10 text-right">
+												<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+												<button class="btn btn-primary btn-xs">Book</button>
+												<div>
+													<a href="#"
+													   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+													   title="Fare details">Fare Details</a>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+									<div class="panel-collapse collapse" id="trip-no-0-2"
+										 role="tabpanel">
+										<div class="panel-body p10">
+											<div class="row margin-r-l-0">
+
+												<div class="col-xs-12">
+													<h5 class="m-t-b-0">
+														New Delhi <i class="fa fa-long-arrow-right"></i> New York,
+														United States <span class="medium"> 02 May 2016 </span>
+													</h5>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>Airline</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">DEL &rarr; LGA</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">02 May 2016</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">--</p>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-accordion-default margin-b-5 border-r">
+									<div class="panel-heading padding-0">
+
+										<div class="row margin-r-l-0">
+											<a class="collapsed" data-toggle="collapse"
+											   data-parent="#data-cell-div" href="#trip-no-0-2">
+												<div class="hover col-xs-9 p10 border-rgt">
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>Jet Airways</p>
+													</div>
+													<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">18:00</h4>
+
+														</div>
+														<div class="col-xs-6 p-l-0 p-r-0">
+															<h4 class="margin-t-0">24:32</h4>
+
+														</div>
+														<div class="col-xs-12 p-l-0 p-r-0">
+															<p class="">DEL &rarr; LGA</p>
+														</div>
+
+													</div>
+
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0">12h</h4>
+														<p class="">1-stop</p>
+													</div>
+
+												</div>
+											</a>
+											<div class="col-xs-3 p10 text-right">
+												<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+												<button class="btn btn-primary btn-xs">Book</button>
+												<div>
+													<a href="#"
+													   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+													   title="Fare details">Fare Details</a>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+									<div class="panel-collapse collapse" id="trip-no-0-2"
+										 role="tabpanel">
+										<div class="panel-body p10">
+											<div class="row margin-r-l-0">
+
+												<div class="col-xs-12">
+													<h5 class="m-t-b-0">
+														New Delhi <i class="fa fa-long-arrow-right"></i> New York,
+														United States <span class="medium"> 02 May 2016 </span>
+													</h5>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+													<span><span
+															class="status fa-stack fa-lg cancelled-color"
+															title="Cancelled"><i
+															class="fa fa-circle fa-stack-2x"></i><i
+															class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+														<p>Airline</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">DEL &rarr; LGA</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">02 May 2016</p>
+													</div>
+													<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+														<h4 class="margin-t-0 margin-b-5">--</h4>
+														<p class="">--</p>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12">
+								<div class="multi-city-list p-r-l-2">
+									<ul class="list-inline">
+										<li>
+											<div class="w409 pull-left">
+
+												<div
+														class="panel panel-accordion-default margin-b-5 border-r">
+													<div class="panel-heading padding-0">
+
+														<div class="row margin-r-l-0">
+															<a class="collapsed" data-toggle="collapse"
+															   data-parent="#data-cell-div" href="#trip-no-0-2">
+																<div class="hover col-xs-9 p10 border-rgt">
+
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																	<span><span
+																			class="status fa-stack fa-lg cancelled-color"
+																			title="Cancelled"><i
+																			class="fa fa-circle fa-stack-2x"></i><i
+																			class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+																		<p>Jet Airways</p>
+																	</div>
+																	<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+																		<div class="col-xs-6 p-l-0 p-r-0">
+																			<h4 class="margin-t-0">18:00</h4>
+
+																		</div>
+																		<div class="col-xs-6 p-l-0 p-r-0">
+																			<h4 class="margin-t-0">24:32</h4>
+
+																		</div>
+																		<div class="col-xs-12 p-l-0 p-r-0">
+																			<p class="">DEL &rarr; LGA</p>
+																		</div>
+
+																	</div>
+
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0">12h</h4>
+																		<p class="">1-stop</p>
+																	</div>
+
+																</div>
+															</a>
+															<div class="col-xs-3 p10 text-right">
+																<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+																<button class="btn btn-primary btn-xs">Book</button>
+																<div>
+																	<a href="#"
+																	   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+																	   title="Fare details">Fare Details</a>
+																</div>
+
+															</div>
+														</div>
+
+													</div>
+													<div class="panel-collapse collapse" id="trip-no-0-2"
+														 role="tabpanel">
+														<div class="panel-body p10">
+															<div class="row margin-r-l-0">
+
+																<div class="col-xs-12">
+																	<h5 class="m-t-b-0">
+																		New Delhi <i class="fa fa-long-arrow-right"></i> New
+																		York, United States <span class="medium"> 02 May
+																		2016 </span>
+																	</h5>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																	<span><span
+																			class="status fa-stack fa-lg cancelled-color"
+																			title="Cancelled"><i
+																			class="fa fa-circle fa-stack-2x"></i><i
+																			class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+																		<p>Airline</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">DEL &rarr; LGA</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">02 May 2016</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">--</p>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</li>
+										<li>
+											<div class="w409 pull-left">
+
+												<div
+														class="panel panel-accordion-default margin-b-5 border-r">
+													<div class="panel-heading padding-0">
+
+														<div class="row margin-r-l-0">
+															<a class="collapsed" data-toggle="collapse"
+															   data-parent="#data-cell-div" href="#trip-no-0-2">
+																<div class="hover col-xs-9 p10 border-rgt">
+
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																	<span><span
+																			class="status fa-stack fa-lg cancelled-color"
+																			title="Cancelled"><i
+																			class="fa fa-circle fa-stack-2x"></i><i
+																			class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+																		<p>Jet Airways</p>
+																	</div>
+																	<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+																		<div class="col-xs-6 p-l-0 p-r-0">
+																			<h4 class="margin-t-0">18:00</h4>
+
+																		</div>
+																		<div class="col-xs-6 p-l-0 p-r-0">
+																			<h4 class="margin-t-0">24:32</h4>
+
+																		</div>
+																		<div class="col-xs-12 p-l-0 p-r-0">
+																			<p class="">DEL &rarr; LGA</p>
+																		</div>
+
+																	</div>
+
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0">12h</h4>
+																		<p class="">1-stop</p>
+																	</div>
+
+																</div>
+															</a>
+															<div class="col-xs-3 p10 text-right">
+																<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+																<button class="btn btn-primary btn-xs">Book</button>
+																<div>
+																	<a href="#"
+																	   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+																	   title="Fare details">Fare Details</a>
+																</div>
+
+															</div>
+														</div>
+
+													</div>
+													<div class="panel-collapse collapse" id="trip-no-0-2"
+														 role="tabpanel">
+														<div class="panel-body p10">
+															<div class="row margin-r-l-0">
+
+																<div class="col-xs-12">
+																	<h5 class="m-t-b-0">
+																		New Delhi <i class="fa fa-long-arrow-right"></i> New
+																		York, United States <span class="medium"> 02 May
+																		2016 </span>
+																	</h5>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																	<span><span
+																			class="status fa-stack fa-lg cancelled-color"
+																			title="Cancelled"><i
+																			class="fa fa-circle fa-stack-2x"></i><i
+																			class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+																		<p>Airline</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">DEL &rarr; LGA</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">02 May 2016</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">--</p>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</li>
+										<li>
+											<div class="w409 pull-left">
+
+												<div
+														class="panel panel-accordion-default margin-b-5 border-r">
+													<div class="panel-heading padding-0">
+
+														<div class="row margin-r-l-0">
+															<a class="collapsed" data-toggle="collapse"
+															   data-parent="#data-cell-div" href="#trip-no-0-2">
+																<div class="hover col-xs-9 p10 border-rgt">
+
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																	<span><span
+																			class="status fa-stack fa-lg cancelled-color"
+																			title="Cancelled"><i
+																			class="fa fa-circle fa-stack-2x"></i><i
+																			class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+																		<p>Jet Airways</p>
+																	</div>
+																	<div class="col-xs-6 p-l-0 p-r-0 margin-t-15">
+
+																		<div class="col-xs-6 p-l-0 p-r-0">
+																			<h4 class="margin-t-0">18:00</h4>
+
+																		</div>
+																		<div class="col-xs-6 p-l-0 p-r-0">
+																			<h4 class="margin-t-0">24:32</h4>
+
+																		</div>
+																		<div class="col-xs-12 p-l-0 p-r-0">
+																			<p class="">DEL &rarr; LGA</p>
+																		</div>
+
+																	</div>
+
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0">12h</h4>
+																		<p class="">1-stop</p>
+																	</div>
+
+																</div>
+															</a>
+															<div class="col-xs-3 p10 text-right">
+																<h3 class="panel-title p-t-b-5">INR 15000/-</h3>
+																<button class="btn btn-primary btn-xs">Book</button>
+																<div>
+																	<a href="#"
+																	   class="btn btn-link btn-xxs p-r-0 p-l-0 border-bottom-dotted"
+																	   title="Fare details">Fare Details</a>
+																</div>
+
+															</div>
+														</div>
+
+													</div>
+													<div class="panel-collapse collapse" id="trip-no-0-2"
+														 role="tabpanel">
+														<div class="panel-body p10">
+															<div class="row margin-r-l-0">
+
+																<div class="col-xs-12">
+																	<h5 class="m-t-b-0">
+																		New Delhi <i class="fa fa-long-arrow-right"></i> New
+																		York, United States <span class="medium"> 02 May
+																		2016 </span>
+																	</h5>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																	<span><span
+																			class="status fa-stack fa-lg cancelled-color"
+																			title="Cancelled"><i
+																			class="fa fa-circle fa-stack-2x"></i><i
+																			class="fa fa-plane fa-stack-1x fa-inverse" onclick=""></i></span></span>
+																		<p>Airline</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">DEL &rarr; LGA</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">02 May 2016</p>
+																	</div>
+																	<div class="col-xs-3 p-l-0 p-r-0 margin-t-15">
+																		<h4 class="margin-t-0 margin-b-5">--</h4>
+																		<p class="">--</p>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</li>
+									</ul>
+
+								</div>
+							</div>
+						</div>
+
+
+						<div id="mask">
+
+							<div class="panel panel-default border-r margin-b-2" style="display:none;" id="flightDealsContainer">
+
+								<div class="panel-heading padding-0">
+									<div class="col-xs-2 p-l-0 p-r-0">
+										<h4 class="panel-title p9">
+											<a class="btn btn-success btn-xxs white-color" id="showDealsBtn"
+											   data-toggle="collapse" href="#" onclick="openShowDealsDiv()"
+											   aria-expanded="true">DEALS ON FLIGHTS</a>
+										</h4>
+									</div>
+
+									<div class="clearfix"></div>
+								</div>
+							</div>
+
+							<div class="panel-collapse collapse in" id="panel-body-show-deals-div"
+								 role="tabpanel" aria-expanded="true">
+
+
+								<div class="panel-body padding-0">
+
+									<div id="segments_roundtrip"></div>
+
+								</div>
+							</div>
+
+
+
+							<div id="segments"></div>
+
+
+						</div>
+
+
+
+					</div>
+				</div>
+
+
+
+
+			</div>
+
+
+
+
+
+		</div>
+
+
+
+		<div id="search-options-body" class="hidden">
+			<div id="rightContent"></div>
+			<div width="100%">
+				<!-- <table width="40%">
+                <tr>
+                    <td style="background-color: #428bca;border-top-left-radius: 100%;border-top-right-radius: 100%;box-shadow:0px 0px 5px 0px;" class="formFieldTitle">
+                    <table align="left" width="100%" cellpadding="0" cellspacing="0">
+                        <tbody><tr style="background-color: transparent; height: 30px;">
+                                <td colspan="4"><span class="upTitleCss" style="color:white;padding-left:30%;" >Search For Options</span></td>
+                            </tr>
+                    </tbody></table>
+                    </td>
+
+                </tr>
+
+                </table> -->
+
+				<div>
+					<table width="100%" id="flight-table">
+						<tr>
+							<td width="91%">
+								<div id="header">
+									<!-- <div align="center" style="padding-top: 10px;">
+                    <table width="100%" align="center" class= "search">
+                        <tr style="padding-top: 3px">
+                            <td width="40%"><label style="height:30px;font-size:12pt;">From</label></td>
+                            <td width="40%"><label style="height:30px;font-size:12pt;">To</label></td>
+                            <td width="16%"><label style="height:30px;font-size:12pt;">Adults</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="txt_city"  style="height:25px;font-size:12pt;width:95%"/></td>
+                            <td width="40%"><input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="txt_to_city"  style="height:25px;font-size:12pt;width:95%"/></td>
+                            <td width="16%">
+                                <select id="txt_guest_count" style="height:25px;font-size:12pt;width:95%">
+                                    <option value="1">1 Adult</option>
+                                    <option value="2">2 Adults</option>
+                                    <option value="3">3 Adults</option>
+                                    <option value="4">4 Adults</option>
+                                    <option value="5">5 Adults</option>
+                                    <option value="6">6 Adults</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr style="padding-top: 3px">
+                            <td width="22%"><label style="height:30px;font-size:12pt;">Departure Date</label></td>
+                            <td width="22%"><label style="height:30px;font-size:12pt;">Return Date</label></td>
+                            <td></td>
+                        </tr>
+                        <tr style="padding-top: 3px">
+                            <td width="22%"><input id="txt_indate" style="height:25px;font-size:12pt;width:95%" readonly="readonly"></td>
+                            <td width="22%"><input id="txt_outdate" style="height:25px;font-size:12pt;width:95%" readonly="readonly"></td>
+                            <td></td>
+                        </tr>
+                        <tr style="padding-top: 3px">
+                            <td width="22%"><label style="height:30px;font-size:12pt;">Departure Time</label></td>
+                            <td width="22%"><label style="height:30px;font-size:12pt;">Return Time</label></td>
+                            <td><input type = "hidden" id = "requestId"/></td>
+                        </tr>
+                        <tr style="padding-top: 3px">
+                            <td width="22%"><input id="txt_intime" style="height:25px;font-size:12pt;width:95%"></td>
+                            <td width="22%"><input id="txt_outtime" style="height:25px;font-size:12pt;width:95%"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: bottom;"><input type="radio" id="opt_oneway" value="1" name="One way" checked="checked" onclick="onClickOneWay()"/>One Way&nbsp;&nbsp;<input id="opt_roundtrip" type="radio" value="2" name="Round trip" onclick='onClickReturn()'/>Round Trip</td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: bottom;"><input type="button" style="background-image: url('web/images/button-search_on.png');width:150px;height:40px;no-repeat;border:none;background-color: transparent;vertical-align: bottom;" onclick="init()" ></td>
+                        </tr>
+                    </table>
+                </div> -->
+
+
+
+
+								</div>
+							</td>
+							<td width="09%"></td>
+						</tr>
+						<tr>
+							<td width="65%">
+								<div></div>
+								<div id="root"
+									 style="padding-top: 10px; width: 100%; display: block">
+									<table style="width: 100%">
+										<tr>
+											<td width="100%" colspan="2"></td>
+										</tr>
+										<tr>
+											<td width="50%" colspan="1"><input type="button"
+																			   id="prev" value="Previous" onclick="onPrevious()"
+																			   style="display: none;" /></td>
+											<td width="50%" colspan="1" align="right"><input
+													type="button" id="next" value="Next" onclick="onNext()"
+													style="display: none;" /></td>
+										</tr>
+										<tr>
+											<!-- <td id="td_onward" width="100%" valign="top">
+                            <div id="onward" style="width:100%"></div>
+                        </td>
+                        <td id="td_return" width="0%" valign="top">
+                            <div id="return" style="display:none;width:100%"></div>
+                        </td> -->
+											<td width="100%" colspan="2"></td>
+										</tr>
+									</table>
+								</div>
+							</td>
+							<td width="23%" style="vertical-align: top;"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="deviate_dialog" title="Deviation Confirmation"
+				 style="display: none;">
+				<div style="font-size: 14pt">The price is beyond your
+					eligibility. Deviation approval is required to complete this
+					booking. Do you want to apply for deviation?</div>
+				<p>
+				<div>
+					<input type="button" size="10" value="Ok" onclick="applyDeviation()" />
+				</div>
+			</div>
+
+			<div id="old-dialog" title="Booking Confirmation" style="display: none;">
+				<div style="font-size: 12pt; padding-left: 128px">Please enter
+					the following details to complete the booking</div>
+				<div id="content">
+					<div id="tab-container">
+						<ul style="list-style-type: none; padding-left: 0">
+							<li><a href="javascript:void(0);"
+								   onclick="onBookTabClick('paymentInfo')">Payment Information</a></li>
+							<li><a href="javascript:void(0);"
+								   onclick="onBookTabClick('cancellationPolicy')">Cancellation
+								Policy</a></li>
+							<li><a href="javascript:void(0);"
+								   onclick="onBookTabClick('checkInInstructions')">Check-in
+								Instructions</a></li>
+						</ul>
+					</div>
+					<div id="main-container" style="font-size: 10pt">
+						<div id="paymentInfo" style="padding: 5">
+							<table cellpadding="5">
+								<tr>
+									<td align="left">Total Price</td>
+									<td align="left">
+										<div style="color: black">
+											<b><label id="lbl_selected_price"></label></b>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td align="right" " class="formFieldTitle">Credit Card
+									Type <span style="color: red"><b>*</b></span>
+									</td>
+									<td align="left"><select id="ccType">
+										<option value="--" selected="selected">Select..</option>
+										<option value="VI">Visa</option>
+										<option value="CA">Master Card</option>
+										<option value="AX">American Express</option>
+										<option value="E">Electron</option>
+										<option value="T">Carte Si</option>
+										<option value="DC">DINERS CLUB INTERNATIONAL</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td align="right" " class="formFieldTitle">Credit Card
+									Number <span style="color: red"><b>*</b></span>
+									</td>
+									<td align="left"><input type="text" size="20" id="ccNumber" /></td>
+								</tr>
+								<tr>
+									<td align="right" class="formFieldTitle" style="width: 28%;">Name
+										On Card <span style="color: red"><b>*</b></span>
+									</td>
+									<td colspan="3"><input type="text" id="nameOnCard"
+														   name="nameOnCard" style="width: 100%;" /></td>
+
+								</tr>
+								<tr>
+									<td align="right" " class="formFieldTitle">Expiry Year <span
+										style="color: red"><b>*</b></span>
+									</td>
+									<td align="left"><input type="text" size="20" id="expYear" /></td>
+								</tr>
+								<tr>
+									<td align="right" " class="formFieldTitle">Expiry Month <span
+										style="color: red"><b>*</b></span>
+									</td>
+									<td align="left"><input type="text" size="20" id="expMonth" /></td>
+								</tr>
+
+								<tr>
+									<td align="right" " class="formFieldTitle">CVV Number <span
+										style="color: red"><b>*</b></span>
+									</td>
+									<td align="left" style="width: 30%;"><input type="text"
+																				id="cvvNumber" style="width: 100%; width: 50% \9" /></td>
+
+								</tr>
+
+								<tr>
+									<td colspan="2"><div id="priceDesclaimer"
+														 style="font-size: 8pt; color: black; font-weight: bold;"></div></td>
+								</tr>
+								<tr>
+									<th class='travelerInfoHeader'>First Name</th>
+
+									<th class='travelerInfoHeader'>Last name</th>
+
+									<th class='travelerInfoHeader'>Gender</th>
+
+								</tr>
+								<tr>
+									<td align="left"></td>
+									<td align="right"><input type="button" size="10" value="Ok"
+															 onclick="onAirBook(selectedFlightToBook)" /></td>
+								</tr>
+
+							</table>
+						</div>
+						<div id="checkInInstructions"
+							 style="padding-left: 5px; padding-top: 5px; display: none; min-height: 250px;">
+						</div>
+						<div id="cancellationPolicy"
+							 style="padding-left: 5px; padding-top: 5px; display: none; min-height: 250px;">
+						</div>
+					</div>
+				</div>
+
+				<div style="display: none">
+					<input id="selected_hotelId" /> <input id="selected_roomType" /> <input
+						id="selected_rateCode" /> <input id="selected_price" /> <input
+						id="selected_rateKey" />
+				</div>
+			</div>
+
+
+
+			<div id="message" title="Information" style="display: none;"
+				 align="center">
+				<div style="font-size: 12pt;" align="left">
+					<label id="lbl_message"></label>
+				</div>
+			</div>
+
+			<div id="self_booking_message" title="Information"
+				 style="display: none;" align="center">
+				<div style="font-size: 12pt;" align="left">
+					<label id="lbl_selfbooking_message"></label>
+				</div>
+				<div style="font-size: 10pt;" align="left">
+					<a id="lnk_eticket" href="">Click here to download e-ticket</a>
+				</div>
+			</div>
+
+			<div id="compare_dialog" title="Compare"
+				 style="display: none; font-size: 10pt;">
+				<table id="table_compare_dialog" width="100%" cellspacing="5"
+					   cellpadding="5">
+					<tr id="table_compare_dialog_header">
+						<td></td>
+					</tr>
+					<tr id="table_compare_wifi">
+						<td>Internet Access</td>
+					</tr>
+					<tr id="table_compare_parking">
+						<td>Parking</td>
+					</tr>
+					<tr id="table_compare_acab">
+						<td>Airport Shuttle</td>
+					</tr>
+					<tr id="table_compare_fit">
+						<td>Fitness Center</td>
+					</tr>
+					<tr id="table_compare_spool">
+						<td>Swimming Pool</td>
+					</tr>
+					<tr id="table_compare_nsroom">
+						<td>Nonsmoking Rooms</td>
+					</tr>
+					<tr id="table_compare_laundry">
+						<td>Laundry</td>
+					</tr>
+				</table>
+			</div>
+			<div id="assist_dialog" title="Assist"
+				 style="display: none; font-size: 10pt;">
+				<div>Following options will be submitted for assisted booking.
+					Please confirm.</div>
+				<div style="padding-top: 10px">
+					<table id="table_assist_dialog" width="100%" cellspacing="5"
+						   cellpadding="5">
+					</table>
+				</div>
+				<div style="padding-top: 10px">
+					<table cellpadding="10">
+						<tr>
+							<td align="left"></td>
+							<td align="right"><input type="button" size="10"
+													 value="Submit" onclick="assistBook()" /></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div id="map_canvas"
+				 style="width: 700px; height: 500px; margin-left: 80px;"></div>
+
+			<div id="room_details_popup" style="display: none; z-index: 2000;">
+
+				<div align="center"></div>
+				<div id="block" class="block" onclick="changeClass()">
+					<div class="front side">
+						<table cellpadding="5">
+							<tr>
+								<td valign="top"><img alt=""
+													  src="https://d2whcypojkzby.cloudfront.net/imageRepo/1/0/30/227/756/miapt_phototour12_C.jpg">
+								</td>
+								<td>
+									<div>
+										<b>Cancellation Policy</b>
+										<div id="cancelPolicyDesc" style="font-size: 10pt"></div>
+									</div>
+									<div style="padding-top: 15px">
+										<b>Check-in Instructions</b>
+										<div id="checkInPolicyDesc" style="font-size: 10pt"></div>
+									</div>
+									<div style="padding-top: 15px">
+										<b>Room Rate Details</b>
+										<div id="roomRateDetails" style="font-size: 10pt">
+											<table cellpadding="2">
+												<tr>
+													<td valign="top">Room 1*</td>
+													<td>
+														<div id="basePrice" style="font-weight: bold;"></div>
+														<div style="font-size: 8pt; white-space: nowrap;">
+															*Excluding tax recovery charges and service fees</div>
+													</td>
+												</tr>
+												<tr>
+													<td style="white-space: nowrap;">Tax Recovery Charges
+														and Service Fees</td>
+													<td id="surchargePrice"
+														style="font-weight: bold; white-space: nowrap;"></td>
+												</tr>
+												<tr>
+													<td valign="top">Total Charges**</td>
+													<td>
+														<div id="totalPrice" style="font-weight: bold;"></div>
+														<div style="font-size: 8pt; white-space: nowrap;">
+															**Including tax recovery charges and service fees</div>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div id="hotel_policy" style="padding-top: 15px">
+										<b>Hotel Policy</b>
+										<div id="hotelPolicyDesc" style="font-size: 10pt"></div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="back side">
+						<div>Room photos</div>
+						<div align="center">
+							<table cellpadding="5px">
+								<tr>
+									<td><img alt=""
+											 src="//images.travelnow.com/hotels/1000000/30000/20300/20230/20230_61_t.jpg">
+									</td>
+									<td><img alt=""
+											 src="//images.travelnow.com/hotels/1000000/30000/20300/20230/20230_61_t.jpg">
+									</td>
+									<td><img alt=""
+											 src="//images.travelnow.com/hotels/1000000/30000/20300/20230/20230_61_t.jpg">
+									</td>
+									<td><img alt=""
+											 src="//images.travelnow.com/hotels/1000000/30000/20300/20230/20230_61_t.jpg">
+									</td>
+									<td><img alt=""
+											 src="//images.travelnow.com/hotels/1000000/30000/20300/20230/20230_61_t.jpg">
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mail-preview" style="background: white; border-radius: 0px;"></div>
+			<!-- <div id='mail-preview' style='background:white;border-radius:0px'>
+
+         <table style="width:100%">
+             <tr>
+                 <td width="100%">
+                      <input type='button' value='Reply' style="background:#105695;color:white;width:70px;border-radius:5px;height:32px" onclick = "showTextArea()">
+                      <input type='button' value='Send' id="send" style="display:none;background:#105695;color:white;width:70px;height:32px;border-radius:5px" onclick = "sendReplyMail()">
+                      <input type='button' value='Close' id="close" style="background:#105695;color:white;width:70px;height:32px;border-radius:5px;float:right" onclick = "closeTextBox()">
+
+                 </td>
+             </tr>
+             <tr height="20px"></tr>
+             <tr>
+                 <td width="100%">
+                         <textarea cols="90" id="replyText"type="text" style="display:none;width:100%;height:140px;vertical-align:left">
+                         </textarea>
+                 </td>
+             </tr>
+
+         </table>
+         </div> -->
+			<div id="mail-preview" style="background: white; border-radius: 0px;"></div>
+			<div id='mail-preview1' style='background: white'></div>
+			<div id="message" title="Information" style="display: none;"
+				 align="center">
+				<div style="font-size: 12pt;" align="left">
+					<label id="lbl_message"></label>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!--  Booking Progress bar added -->
+
+	<div id="booking-dialog" title="Booking Confirmation" style="display:none;">
+
+		<div id="generic-content" class="col-xs-12">
+			<div id="generic-tab-container" class="p-t-b-10 text-center">
+				<ul class="payment-bwizard-steps" style="">
+					<!-- <li id="travelerInfo-li" class="active current-step"><a
+                        id="travelerInfo-a"><span class="label number-div">1</span>
+                            Traveller </a></li>
+                    <li id="cancellationPolicy-li"><a id="cancellationPolicy-a"><span
+                            class="label number-div">2</span> Cancellation Policy</a></li>
+                    <li id="paymentInfo-li"><a id="paymentInfo-a"><span
+                            class="label number-div">3</span> Payment </a></li>
+                    <li id="summary-li"><a id="summary-a"><span
+                            class="label number-div">4</span> Summary</a></li>
+                    <li id="status-li"><a id="status-a"><span
+                            class="label number-div">5</span> Status &nbsp;&nbsp;&nbsp;</a></li> -->
+
+					<li id="reprice-li" class="active current-step"><a
+							id="reprice-a"><span class="label number-div">1</span>
+						Re-Pricing </a></li>
+					<li id="booking-li"><a id="booking-a"><span
+							class="label number-div">2</span> Tentative Booking </a></li>
+					<li id="confirm-li"><a id="confirm-a"><span
+							class="label number-div">3</span> Confirmation </a></li>
+
+				</ul>
+			</div>
+			<div id="generic-main-container"
+				 style="font-size: 10pt; margin: 0 10px 10px 0;">
+				<div id="generic-message-container"
+					 class="booking-error-msg red col-xs-12"></div>
+
+				<div id="generic-status" class="row p15-l p15-r margin-t-15">
+					<div class="col-xs-12 margin-b-10 text-center">
+						<div class="col-xs-12">
+							<div class="form-group">
+								<label id="booking-progress-label" class="title-header"></label>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 margin-b-10 text-center">
+						<div class="col-xs-12">
+							<div class="form-group">
+								<div id="booking_message" style="word-wrap: break-word;"
+									 class="bg-fff">
+									<img src="web/images/loading.gif" height="65px"
+										 style="padding: 10px;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+
+	</div>
+
+	<script>
+
+var _isERPFlow = false;
+
+$(document).ready(function(){
+	var status = "<%=status%>";
+	var multicityObj = '<%=multicityObj%>';
+	if(status != "null"){
+		if(status == "New"){
+			loadAirBookings('new-tab', '<%=requestId%>');
+		}else if(status == "In_Process"){
+			loadAirBookings('in-process-tab', '<%=requestId%>');
+							}
+						} else if (multicityObj && multicityObj != "null") {
+
+							multicityObj = JSON.parse(multicityObj);
+
+							var searchDataObj = null;
+
+							var tripType = "One way";
+
+							document.getElementById('request-id').value = multicityObj['id'];
+							document.getElementById('traveller-id').value = multicityObj['traveller_ids'];
+
+
+							if (multicityObj && multicityObj['from_city_iata']
+									&& multicityObj['to_city_iata']) {
+
+								gv_FlightType = "one-way";
+
+								searchDataObj = multicityObj;
+
+							}else if(multicityObj && multicityObj['merged_sector_data']){
+
+								var mergedSectorData = multicityObj['merged_sector_data'];
+
+								if(mergedSectorData && mergedSectorData.constructor == Object){
+
+									var multicityObj1 = mergedSectorData['multicity_object'];
+
+									var count = 0;
+
+									for(var int = 0; int < multicityObj1.length; int++){
+
+										var cityObj = multicityObj1[int];
+
+										if(cityObj && cityObj['status']
+											&& cityObj['status'] != 'D'){
+
+											if(count == 0){
+												searchDataObj = cityObj;
+												count++;
+											}
+
+										}
+
+									}
+
+									if(count > 1 && count == 2)
+										tripType = "Round Trip";
+									else if(count > 2)
+										tripType = "Multi City";
+
+								}
+
+							}
+
+							if(searchDataObj && searchDataObj['from_city']
+								&& searchDataObj['to_city']){
+
+								_isERPFlow = true;
+
+								var fromCityIATA = multicityObj['from_city_iata'];
+
+								var toCityIATA = multicityObj['to_city_iata'];
+
+								if(!fromCityIATA){
+
+									fromCityIATA = getFlightIata(searchDataObj['from_city'].split(",")[0]);
+
+								}
+
+								if(!toCityIATA){
+
+									toCityIATA = getFlightIata(searchDataObj['to_city'].split(",")[0]);
+
+								}
+
+
+								document.getElementById("city_from_txt_0").value = searchDataObj['from_city']
+										.split(',')[1]
+										+ " ("
+										+ fromCityIATA
+										+ ")";
+								document.getElementById("city_to_txt_0").value = searchDataObj['to_city']
+										.split(',')[1]
+										+ " ("
+										+ toCityIATA
+										+ ")";
+								document.getElementById("date_txt_0").value = changeDateFormat(
+										searchDataObj['start_date'],
+										'yyyy-mm-dd', 'dd mmmm, yyyy');
+
+								if(tripType == "Round Trip"){
+									document.getElementById("return_date_txt_0").value = changeDateFormat(
+											searchDataObj['end_date'],
+											'yyyy-mm-dd', 'dd mmmm, yyyy');
+								}
+
+							}
+
+							init();
+						} else {
+							_mode = "ERP";
+						}
+					});
+</script>
+	<!-- mukunda test for currency list-->
+	<script type="text/javascript">
+
+
+
+	//for autostoring iata code
+	function getFlightIata(city){
+		var reqURL = "rest/cities/autoCompleteIATA?q=";
+		var result = $("#id").val();
+		var iataCode = "";
+
+		$.ajax({
+			 async:false,
+		 	 dataType: "json",
+		  	 url: reqURL+city,
+		 	success:function(data){
+
+		 		if(data){
+		 			if(data.length>0)
+				    	iataCode = data[0].split("(")[1].replace(")","");
+				     }
+		 	}});
+
+		return iataCode;
+
+	}
+
+	function showConvRate(td, currency) {
+
+		$(".selected_currency").removeClass('selected_currency');
+		$(td).addClass('selected_currency');
+		var selected_currency_lbl = document
+				.getElementById("selected_currency_lbl");
+		selected_currency_lbl.setAttribute('data-current-currency-code',
+				currency['code']);
+		selected_currency_lbl.setAttribute('data-current-currency-symbol',
+				currency['symbol']);
+		selected_currency_lbl.setAttribute('data-current-currency-rate',
+				currency['conv_rate']);
+		selected_currency_lbl.textContent = "";
+		selected_currency_lbl.appendChild(document
+				.createTextNode(currency['code']));
+
+		for (var i = 0; i < entities.length; i++) {
+			var price = document.getElementById("price_" + i);
+			var dataPrice = price.getAttribute("data-price");
+			var convRate = currency['conv_rate'];
+			var code = currency['code'];
+			var convertedPrice = formatCurrency(dataPrice, convRate, code);
+			price.textContent = "";
+			price.appendChild(document.createTextNode(convertedPrice));
+
+			$("[id^='div_" + i + "_td_fd_']").each(function() {
+				var dataPrice = this.getAttribute("data-price");
+				var convertedPrice = formatCurrency(dataPrice, convRate, code);
+				this.textContent = "";
+				this.appendChild(document.createTextNode(convertedPrice));
+
+			});
+
+		}
+
+	}
+
+	function loadAvgTicketAvailability(){
+
+		var reqURL = "rest/notifications/getAvgTicketPrice";
+		var paramObj = {};
+		paramObj['corpId'] = _corpId;
+		var fromCityId = parseInt(document.getElementById("city_from_txt_hidden_0").value);
+		var toCityId = parseInt(document.getElementById("city_to_txt_hidden_0").value);
+		paramObj['fromCity'] = fromCityId;
+		paramObj['toCity'] = toCityId;
+		paramObj['service'] = "AIR";
+
+		if(!isAvgPriceAvailable(fromCityId, toCityId)){
+
+			var jsonString = JSON.stringify(paramObj);
+
+			reqURL += "?param=" + encodeURIComponent(jsonString);
+
+			$.ajax({url:reqURL,dataType : "json",success:function(result){
+
+				 if(result && result[0] && result[0]['avgTicketPrice']){
+
+					 var data = result[0];
+
+					 _avgTicketPrice[fromCityId + "_" + toCityId] = data['avgTicketPrice'];
+					 _searchedAvgTicketPrice = data['avgTicketPrice'];
+				 }
+
+			}});
+		}
+	}
+
+	function isAvgPriceAvailable(fromCityId, toCityId){
+
+		var retVal = false;
+
+		if(_avgTicketPrice && _avgTicketPrice[fromCityId + "_" + toCityId]){
+
+			retVal = true;
+			_searchedAvgTicketPrice = _avgTicketPrice[fromCityId + "_" + toCityId];
+
+		}
+
+		return retVal;
+
+	}
+
+	loadCorpRule();
+
+	var step = 350;
+	var position = 0;
+	var totalWidth = 350; //total hidden multi-city-section li count * step
+
+	$('#scrollLeft').click(function(){
+
+
+		position = position-step;
+		if(position == 0){
+			$('#scrollRight').show();
+			$('#scrollLeft').hide();
+		}
+
+		if(position != 0 && position != totalWidth){
+			$('#scrollRight').show();
+			$('#scrollLeft').show();
+		}
+
+		if(position == totalWidth){
+			$('#scrollRight').hide();
+			$('#scrollLeft').show();
+		}
+
+
+		var curr = $("#multi-city-section");
+		$(curr).animate({"left": (-position) + "px"}, "slow");
+
+
+	});
+
+	$('#scrollRight').click(function(){
+
+		position = position+step;
+		if(position == 0){
+			$('#scrollRight').show();
+			$('#scrollLeft').hide();
+		}
+
+		if(position != 0 && position != totalWidth){
+			$('#scrollRight').show();
+			$('#scrollLeft').show();
+		}
+
+		if(position == totalWidth){
+			$('#scrollRight').hide();
+			$('#scrollLeft').show();
+		}
+
+		var curr = $("#multi-city-section");
+		$(curr).animate({"left": (-position) + "px"}, "slow");
+
+
+
+	});
+
+
+
+</script>
+
+</body>
+</html>
