@@ -1,0 +1,1427 @@
+{
+  "entities": [
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"AMD_BP_MAA_BOM_ADT\",\"value\":\"N\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_MAA_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"14\",\"index\":\"25\",\"booking-class\":\"S\",\"segment-index\":\"25\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"AMD_BP_MAA_BOM_ADT\",\"value\":\"N\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_MAA_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"14\",\"index\":\"26\",\"booking-class\":\"S\",\"segment-index\":\"26\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"AMD_BP_MAA_BOM_ADT\",\"value\":\"N\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_MAA_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"14\",\"index\":\"27\",\"booking-class\":\"S\",\"segment-index\":\"27\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"S2IPO,S2CFA,S2CFA\",\"index\":\"14\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_2314_1494585600000_S2IPO,S2CFA,S2CFA_true_fk_retail_9W_7012_1494622800000_S2IPO,S2CFA,S2CFA_true_fk_retail_9W_618_1494647400000_S2IPO,S2CFA,S2CFA_true_true_fpr_21227\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"17475.0\",\"category\":\"BF\"},{\"amount\":\"1800.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"275.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1095.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"40.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"40.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "16:10:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 21227",
+      "type": "Air",
+      "total_fare": "21227",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "2",
+          "duration": "17h 55m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 10m",
+              "no_of_stops": "",
+              "departure_time": "16:10",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_MAA",
+              "flight_number": "2314",
+              "type": "Leg",
+              "destination_city_code": "MAA",
+              "arrival_time": "17:20",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "1h 55m",
+              "no_of_stops": "0",
+              "departure_time": "02:30",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "MAA",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "MAA_BOM",
+              "flight_number": "7012",
+              "type": "Leg",
+              "destination_city_code": "BOM",
+              "arrival_time": "04:25",
+              "arrival_date": "Sat, 13 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "0h 45m",
+              "no_of_stops": "1",
+              "departure_time": "09:20",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BOM",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "BOM_PNQ",
+              "flight_number": "618",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "10:05",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 21227",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 3752.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 17475.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"9\",\"index\":\"14\",\"booking-class\":\"Q\",\"segment-index\":\"14\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"9\",\"index\":\"15\",\"booking-class\":\"Q\",\"segment-index\":\"15\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"Q2IPO,Q2IPO\",\"index\":\"9\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_416_1494585900000_Q2IPO,Q2IPO_true_fk_retail_9W_618_1494647400000_Q2IPO,Q2IPO_true_true_fpr_18063\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"15465.0\",\"category\":\"BF\"},{\"amount\":\"900.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"200.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"928.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"34.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"34.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "16:15:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 18063",
+      "type": "Air",
+      "total_fare": "18063",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "17h 50m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 35m",
+              "no_of_stops": "",
+              "departure_time": "16:15",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_BOM",
+              "flight_number": "416",
+              "type": "Leg",
+              "destination_city_code": "BOM",
+              "arrival_time": "17:50",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "0h 45m",
+              "no_of_stops": "0",
+              "departure_time": "09:20",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BOM",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "BOM_PNQ",
+              "flight_number": "618",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "10:05",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 18063",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 2598.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 15465.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"13\",\"index\":\"22\",\"booking-class\":\"Q\",\"segment-index\":\"22\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"13\",\"index\":\"23\",\"booking-class\":\"Q\",\"segment-index\":\"23\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"13\",\"index\":\"24\",\"booking-class\":\"Q\",\"segment-index\":\"24\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"Q2IPO,Q2IPOA,Q2IPO\",\"index\":\"13\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_416_1494585900000_Q2IPO,Q2IPOA,Q2IPO_true_fk_retail_9W_348_1494624600000_Q2IPO,Q2IPOA,Q2IPO_true_fk_retail_9W_2822_1494635700000_Q2IPO,Q2IPOA,Q2IPO_true_true_fpr_21033\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"17475.0\",\"category\":\"BF\"},{\"amount\":\"1350.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"325.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1073.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"380.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"39.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"39.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "16:15:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 21033",
+      "type": "Air",
+      "total_fare": "21033",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "2",
+          "duration": "15h 0m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 35m",
+              "no_of_stops": "",
+              "departure_time": "16:15",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_BOM",
+              "flight_number": "416",
+              "type": "Leg",
+              "destination_city_code": "BOM",
+              "arrival_time": "17:50",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "1h 20m",
+              "no_of_stops": "0",
+              "departure_time": "03:00",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BOM",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "BOM_HYD",
+              "flight_number": "348",
+              "type": "Leg",
+              "destination_city_code": "HYD",
+              "arrival_time": "04:20",
+              "arrival_date": "Sat, 13 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "1h 10m",
+              "no_of_stops": "1",
+              "departure_time": "06:05",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "HYD",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "HYD_PNQ",
+              "flight_number": "2822",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "07:15",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 21033",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 3558.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 17475.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"15\",\"index\":\"28\",\"booking-class\":\"Q\",\"segment-index\":\"28\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"15\",\"index\":\"29\",\"booking-class\":\"Q\",\"segment-index\":\"29\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"15\",\"index\":\"30\",\"booking-class\":\"Q\",\"segment-index\":\"30\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"Q2IPO,Q2IPOA,Q2IPO\",\"index\":\"15\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_416_1494585900000_Q2IPO,Q2IPOA,Q2IPO_true_fk_retail_9W_348_1494624600000_Q2IPO,Q2IPOA,Q2IPO_true_fk_retail_9W_2574_1494693300000_Q2IPO,Q2IPOA,Q2IPO_true_true_fpr_21633\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"17575.0\",\"category\":\"BF\"},{\"amount\":\"1350.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"325.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1078.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"847.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"380.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"39.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"39.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "16:15:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 21633",
+      "type": "Air",
+      "total_fare": "21633",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "2",
+          "duration": "31h 0m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 35m",
+              "no_of_stops": "",
+              "departure_time": "16:15",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_BOM",
+              "flight_number": "416",
+              "type": "Leg",
+              "destination_city_code": "BOM",
+              "arrival_time": "17:50",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "1h 20m",
+              "no_of_stops": "0",
+              "departure_time": "03:00",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BOM",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "BOM_HYD",
+              "flight_number": "348",
+              "type": "Leg",
+              "destination_city_code": "HYD",
+              "arrival_time": "04:20",
+              "arrival_date": "Sat, 13 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "1h 10m",
+              "no_of_stops": "1",
+              "departure_time": "22:05",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "HYD",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "HYD_PNQ",
+              "flight_number": "2574",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "23:15",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 21633",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 4058.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 17575.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"1\",\"index\":\"1\",\"booking-class\":\"H\",\"segment-index\":\"1\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"1\",\"index\":\"2\",\"booking-class\":\"H\",\"segment-index\":\"2\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Non-Refundable\",\"fare-basis-code\":\"H2IPOB,H2IPO\",\"index\":\"1\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_2803_1494590700000_H2IPOB,H2IPO_false_fk_retail_9W_2822_1494635700000_H2IPOB,H2IPO_false_false_fpr_9391\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"6600.0\",\"category\":\"BF\"},{\"amount\":\"900.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"200.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"432.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"847.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"380.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"16.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"16.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "17:35:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 9391",
+      "type": "Air",
+      "total_fare": "9391",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "13h 40m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 5m",
+              "no_of_stops": "",
+              "departure_time": "17:35",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_HYD",
+              "flight_number": "2803",
+              "type": "Leg",
+              "destination_city_code": "HYD",
+              "arrival_time": "18:40",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "1h 10m",
+              "no_of_stops": "0",
+              "departure_time": "06:05",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "HYD",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "HYD_PNQ",
+              "flight_number": "2822",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "07:15",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 9391",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 2791.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 6600.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"5\",\"index\":\"7\",\"booking-class\":\"L\",\"segment-index\":\"7\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"5\",\"index\":\"8\",\"booking-class\":\"L\",\"segment-index\":\"8\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"L2IPOB,L2IPO\",\"index\":\"5\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_2803_1494590700000_L2IPOB,L2IPO_true_fk_retail_9W_2574_1494606900000_L2IPOB,L2IPO_true_true_fpr_15733\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"13050.0\",\"category\":\"BF\"},{\"amount\":\"900.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"200.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"793.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"380.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"29.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"29.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "17:35:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 15733",
+      "type": "Air",
+      "total_fare": "15733",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "5h 40m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 5m",
+              "no_of_stops": "",
+              "departure_time": "17:35",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_HYD",
+              "flight_number": "2803",
+              "type": "Leg",
+              "destination_city_code": "HYD",
+              "arrival_time": "18:40",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 10m",
+              "no_of_stops": "0",
+              "departure_time": "22:05",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "HYD",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "HYD_PNQ",
+              "flight_number": "2574",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "23:15",
+              "arrival_date": "Fri, 12 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 15733",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 2683.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 13050.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_HYD_BOM_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"8\",\"index\":\"11\",\"booking-class\":\"H\",\"segment-index\":\"11\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_HYD_BOM_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"8\",\"index\":\"12\",\"booking-class\":\"H\",\"segment-index\":\"12\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_HYD_BOM_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"8\",\"index\":\"13\",\"booking-class\":\"S\",\"segment-index\":\"13\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Non-Refundable\",\"fare-basis-code\":\"H2IPOB,H2IPO,S2IPO\",\"index\":\"8\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_2803_1494590700000_H2IPOB,H2IPO,S2IPO_false_fk_retail_9W_349_1494640200000_H2IPOB,H2IPO,S2IPO_false_fk_retail_9W_618_1494647400000_H2IPOB,H2IPO,S2IPO_false_false_fpr_16534\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"12765.0\",\"category\":\"BF\"},{\"amount\":\"1350.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"325.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"809.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"847.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"380.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"29.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"29.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "17:35:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 16534",
+      "type": "Air",
+      "total_fare": "16534",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "2",
+          "duration": "16h 30m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 5m",
+              "no_of_stops": "",
+              "departure_time": "17:35",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_HYD",
+              "flight_number": "2803",
+              "type": "Leg",
+              "destination_city_code": "HYD",
+              "arrival_time": "18:40",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "1h 30m",
+              "no_of_stops": "0",
+              "departure_time": "07:20",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "HYD",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "HYD_BOM",
+              "flight_number": "349",
+              "type": "Leg",
+              "destination_city_code": "BOM",
+              "arrival_time": "08:50",
+              "arrival_date": "Sat, 13 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "0h 45m",
+              "no_of_stops": "1",
+              "departure_time": "09:20",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BOM",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "BOM_PNQ",
+              "flight_number": "618",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "10:05",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 16534",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 3769.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 12765.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"17\",\"index\":\"33\",\"booking-class\":\"L\",\"segment-index\":\"33\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"17\",\"index\":\"34\",\"booking-class\":\"L\",\"segment-index\":\"34\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"L2IPO,L2IPO\",\"index\":\"17\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_448_1494593100000_L2IPO,L2IPO_true_fk_retail_9W_618_1494647400000_L2IPO,L2IPO_true_true_fpr_22409\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"19565.0\",\"category\":\"BF\"},{\"amount\":\"900.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"200.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1158.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"42.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"42.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "18:15:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 22409",
+      "type": "Air",
+      "total_fare": "22409",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "15h 50m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 35m",
+              "no_of_stops": "",
+              "departure_time": "18:15",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_BOM",
+              "flight_number": "448",
+              "type": "Leg",
+              "destination_city_code": "BOM",
+              "arrival_time": "19:50",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "0h 45m",
+              "no_of_stops": "0",
+              "departure_time": "09:20",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BOM",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "BOM_PNQ",
+              "flight_number": "618",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "10:05",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 22409",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 2844.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 19565.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"AI\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304487\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904487\"}]},\"pricing-info-index\":\"4\",\"index\":\"5\",\"booking-class\":\"L\",\"segment-index\":\"5\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_BP_HYD_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"AI\"},{\"name\":\"AMD_BP_BLR_HYD_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304487\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904487\"}]},\"pricing-info-index\":\"4\",\"index\":\"6\",\"booking-class\":\"Q\",\"segment-index\":\"6\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"LIP,QIP\",\"index\":\"4\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_AI_516_1494596400000_LIP,QIP_true_fk_retail_AI_9867_1494680700000_LIP,QIP_true_true_fpr_12141\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"10225.0\",\"category\":\"BF\"},{\"amount\":\"70.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"577.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"847.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"380.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"21.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"21.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "19:10:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 12141",
+      "type": "Air",
+      "total_fare": "12141",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "25h 10m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 0m",
+              "no_of_stops": "",
+              "departure_time": "19:10",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Air India",
+              "source_city_code": "BLR",
+              "flight_code": "AI",
+              "flight_image": "./images/flight-images/AI.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_HYD",
+              "flight_number": "516",
+              "type": "Leg",
+              "destination_city_code": "HYD",
+              "arrival_time": "20:10",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "1h 45m",
+              "no_of_stops": "0",
+              "departure_time": "18:35",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Air India",
+              "source_city_code": "HYD",
+              "flight_code": "AI",
+              "flight_image": "./images/flight-images/AI.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "HYD_PNQ",
+              "flight_number": "9867",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "20:20",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 12141",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 1916.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 10225.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":{\"external-references\":{\"external-reference\":[{\"name\":\"FareSellKeyBLR_PNQ0\",\"value\":\"0~Y~~Y0IP~1057~~4~X\"},{\"name\":\"INDIGO-RETAIL-CRED-NAME\",\"value\":\"production_IN_search_indigo_newskies_OTB\"},{\"name\":\"tm-ignore_FareSequence_BLR_PNQ\",\"value\":\"4\"},{\"name\":\"BLR_PNQ_INDIGO\",\"value\":\"15898.0\"},{\"name\":\"JourneySellKeyBLR_PNQ1\",\"value\":\"6E~ 426~ ~~BLR~05/12/2017 20:25~PNQ~05/12/2017 21:50~\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667307550\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580907550\"},{\"name\":\"tm-ignore_Rule-Number_BLR_PNQ\",\"value\":\"1057\"},{\"name\":\"tm-ignore_FareApplicationTypes_BLR_PNQ\",\"value\":\"Route\"},{\"name\":\"tm-ignore_LCC_VC_DOM\",\"value\":\"6E\"}]},\"pricing-info-index\":\"6\",\"index\":\"9\",\"booking-class\":\"Y\",\"segment-index\":\"9\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"Y0IP\",\"index\":\"6\",\"fare-subtype\":true,\"fare-key\":\"supp_INDIGO|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_6E_426_1494600900000_Y0IP_true__fpr_15898\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"14000.0\",\"category\":\"BF\"},{\"amount\":\"525.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"58.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"813.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "20:25:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 15898",
+      "type": "Air",
+      "total_fare": "15898",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "0",
+          "duration": "1h 25m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 25m",
+              "no_of_stops": "",
+              "departure_time": "20:25",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "IndiGo",
+              "source_city_code": "BLR",
+              "flight_code": "6E",
+              "flight_image": "./images/flight-images/6E.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_PNQ",
+              "flight_number": "426",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "21:50",
+              "arrival_date": "Fri, 12 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 15898",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 1898.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 14000.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"UK\"},{\"name\":\"AMD_BP_CCU_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304490\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904490\"},{\"name\":\"AMD_BP_BLR_CCU_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"18\",\"index\":\"35\",\"booking-class\":\"N\",\"segment-index\":\"35\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"UK\"},{\"name\":\"AMD_BP_CCU_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304490\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904490\"},{\"name\":\"AMD_BP_BLR_CCU_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"18\",\"index\":\"36\",\"booking-class\":\"A\",\"segment-index\":\"36\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"NOW,AOW\",\"index\":\"18\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_UK_898_1494602100000_NOW,AOW_true_fk_retail_UK_985_1494615600000_NOW,AOW_true_true_fpr_22669\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"20500.0\",\"category\":\"BF\"},{\"amount\":\"272.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"140.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1171.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"42.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"42.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "20:45:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 22669",
+      "type": "Air",
+      "total_fare": "22669",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "6h 15m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "2h 40m",
+              "no_of_stops": "",
+              "departure_time": "20:45",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Vistara",
+              "source_city_code": "BLR",
+              "flight_code": "UK",
+              "flight_image": "./images/flight-images/UK.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_CCU",
+              "flight_number": "898",
+              "type": "Leg",
+              "destination_city_code": "CCU",
+              "arrival_time": "23:25",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "2h 30m",
+              "no_of_stops": "0",
+              "departure_time": "00:30",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Vistara",
+              "source_city_code": "CCU",
+              "flight_code": "UK",
+              "flight_image": "./images/flight-images/UK.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "CCU_PNQ",
+              "flight_number": "985",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "03:00",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 22669",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 2169.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 20500.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BLR_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"3\",\"index\":\"4\",\"booking-class\":\"U\",\"segment-index\":\"4\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"U2IPO\",\"index\":\"3\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_7051_1494603000000_U2IPO_true__fpr_10361\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"8775.0\",\"category\":\"BF\"},{\"amount\":\"450.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"75.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"521.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"19.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"19.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "21:00:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 10361",
+      "type": "Air",
+      "total_fare": "10361",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "0",
+          "duration": "1h 20m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 20m",
+              "no_of_stops": "",
+              "departure_time": "21:00",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_PNQ",
+              "flight_number": "7051",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "22:20",
+              "arrival_date": "Fri, 12 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 10361",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 1586.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 8775.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_DEL_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_DEL_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"10\",\"index\":\"16\",\"booking-class\":\"L\",\"segment-index\":\"16\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_DEL_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_DEL_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"10\",\"index\":\"17\",\"booking-class\":\"L\",\"segment-index\":\"17\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"L2IPO,L2IPO\",\"index\":\"10\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_812_1494603900000_L2IPO,L2IPO_true_fk_retail_9W_363_1494690300000_L2IPO,L2IPO_true_true_fpr_19980\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"16375.0\",\"category\":\"BF\"},{\"amount\":\"1800.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"200.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1029.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"37.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"37.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "21:15:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 19980",
+      "type": "Air",
+      "total_fare": "19980",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "26h 5m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "2h 40m",
+              "no_of_stops": "",
+              "departure_time": "21:15",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_DEL",
+              "flight_number": "812",
+              "type": "Leg",
+              "destination_city_code": "DEL",
+              "arrival_time": "23:55",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "2h 5m",
+              "no_of_stops": "0",
+              "departure_time": "21:15",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "DEL",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "DEL_PNQ",
+              "flight_number": "363",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "23:20",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 19980",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 3605.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 16375.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_DEL_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_DEL_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"11\",\"index\":\"18\",\"booking-class\":\"L\",\"segment-index\":\"18\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_DEL_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_DEL_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"11\",\"index\":\"19\",\"booking-class\":\"L\",\"segment-index\":\"19\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"L2IPO,L2IPO\",\"index\":\"11\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_812_1494603900000_L2IPO,L2IPO_true_fk_retail_9W_365_1494643200000_L2IPO,L2IPO_true_true_fpr_19980\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"16375.0\",\"category\":\"BF\"},{\"amount\":\"1800.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"200.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1029.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"37.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"37.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "21:15:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 19980",
+      "type": "Air",
+      "total_fare": "19980",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "13h 0m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "2h 40m",
+              "no_of_stops": "",
+              "departure_time": "21:15",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_DEL",
+              "flight_number": "812",
+              "type": "Leg",
+              "destination_city_code": "DEL",
+              "arrival_time": "23:55",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "2h 5m",
+              "no_of_stops": "0",
+              "departure_time": "08:10",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "DEL",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "DEL_PNQ",
+              "flight_number": "365",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "10:15",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 19980",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 3605.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 16375.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_DEL_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_DEL_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"12\",\"index\":\"20\",\"booking-class\":\"L\",\"segment-index\":\"20\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_DEL_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"AMD_BP_BLR_DEL_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"}]},\"pricing-info-index\":\"12\",\"index\":\"21\",\"booking-class\":\"L\",\"segment-index\":\"21\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"L2IPO,L2IPO\",\"index\":\"12\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_812_1494603900000_L2IPO,L2IPO_true_fk_retail_9W_369_1494671700000_L2IPO,L2IPO_true_true_fpr_19980\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"16375.0\",\"category\":\"BF\"},{\"amount\":\"1800.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"200.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1029.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"37.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"37.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "21:15:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 19980",
+      "type": "Air",
+      "total_fare": "19980",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "20h 55m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "2h 40m",
+              "no_of_stops": "",
+              "departure_time": "21:15",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_DEL",
+              "flight_number": "812",
+              "type": "Leg",
+              "destination_city_code": "DEL",
+              "arrival_time": "23:55",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "2h 5m",
+              "no_of_stops": "0",
+              "departure_time": "16:05",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "DEL",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "DEL_PNQ",
+              "flight_number": "369",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "18:10",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 19980",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 3605.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 16375.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":{\"external-references\":{\"external-reference\":[{\"name\":\"FareSellKeyBLR_PNQ0\",\"value\":\"0~O~~OSAVER~5002~~3~X\"},{\"name\":\"MC_DIFF\",\"value\":\"316.0\"},{\"name\":\"tm-ignore_FareSequence_BLR_PNQ\",\"value\":\"3\"},{\"name\":\"SG-RETAIL-PROMO-CODE\",\"value\":\"$entry.value\"},{\"name\":\"BF_MKP_1\",\"value\":\"0.0\"},{\"name\":\"JourneySellKeyBLR_PNQ1\",\"value\":\"SG~ 424~ ~~BLR~05/12/2017 21:30~PNQ~05/12/2017 22:45~\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667303402\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580903402\"},{\"name\":\"tm-ignore_Rule-Number_BLR_PNQ\",\"value\":\"5002\"},{\"name\":\"tm-ignore_FareApplicationTypes_BLR_PNQ\",\"value\":\"Route\"},{\"name\":\"BLR_PNQ_SPICEJET\",\"value\":\"9533.0\"},{\"name\":\"tm-ignore_LCC_VC_DOM\",\"value\":\"SG\"}]},\"pricing-info-index\":\"2\",\"index\":\"3\",\"booking-class\":\"O\",\"segment-index\":\"3\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Non-Refundable\",\"fare-basis-code\":\"OSAVER\",\"index\":\"2\",\"fare-subtype\":true,\"fare-key\":\"supp_SPICEJET|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_tbf_SG_424_1494604800000_OSAVER_false__fpr_9533\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"7995.0\",\"category\":\"BF\"},{\"amount\":\"525.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"17.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"494.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "21:30:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 9533",
+      "type": "Air",
+      "total_fare": "9533",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "0",
+          "duration": "1h 15m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 15m",
+              "no_of_stops": "",
+              "departure_time": "21:30",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "SpiceJet",
+              "source_city_code": "BLR",
+              "flight_code": "SG",
+              "flight_image": "./images/flight-images/SG.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_PNQ",
+              "flight_number": "424",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "22:45",
+              "arrival_date": "Fri, 12 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 9533",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 1538.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 7995.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":[{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"16\",\"index\":\"31\",\"booking-class\":\"L\",\"segment-index\":\"31\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"},{\"external-references\":{\"external-reference\":[{\"name\":\"AMD_VC_BLR_PNQ_ADT\",\"value\":\"9W\"},{\"name\":\"AMD_BP_BOM_PNQ_ADT\",\"value\":\"Y\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667304492\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580904492\"},{\"name\":\"AMD_BP_BLR_BOM_ADT\",\"value\":\"Y\"}]},\"pricing-info-index\":\"16\",\"index\":\"32\",\"booking-class\":\"L\",\"segment-index\":\"32\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}]},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"L2IPO,L2IPO\",\"index\":\"16\",\"fare-subtype\":true,\"fare-key\":\"supp_AMADEUS|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_9W_449_1494606000000_L2IPO,L2IPO_true_fk_retail_9W_618_1494647400000_L2IPO,L2IPO_true_true_fpr_21773\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"18965.0\",\"category\":\"BF\"},{\"amount\":\"900.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"200.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"1124.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"41.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"41.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "21:50:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 21773",
+      "type": "Air",
+      "total_fare": "21773",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "1",
+          "duration": "12h 15m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 40m",
+              "no_of_stops": "",
+              "departure_time": "21:50",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BLR",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-12",
+              "segment": "BLR_BOM",
+              "flight_number": "449",
+              "type": "Leg",
+              "destination_city_code": "BOM",
+              "arrival_time": "23:30",
+              "arrival_date": "Fri, 12 May 2017"
+            },
+            {
+              "org_depart_date": "2017-05-13",
+              "duration": "0h 45m",
+              "no_of_stops": "0",
+              "departure_time": "09:20",
+              "departure_date": "Sat, 13 May 2017",
+              "flight_name": "Jet Airways",
+              "source_city_code": "BOM",
+              "flight_code": "9W",
+              "flight_image": "./images/flight-images/9W.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "BOM_PNQ",
+              "flight_number": "618",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "10:05",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 21773",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 2808.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 18965.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "booking_data": "[{\"booking-info-list\":{\"booking-info\":{\"external-references\":{\"external-reference\":[{\"name\":\"FareSellKeyBLR_PNQ0\",\"value\":\"0~Y~~Y0IP~1057~~4~X\"},{\"name\":\"INDIGO-RETAIL-CRED-NAME\",\"value\":\"production_IN_search_indigo_newskies_OTB\"},{\"name\":\"tm-ignore_FareSequence_BLR_PNQ\",\"value\":\"4\"},{\"name\":\"BLR_PNQ_INDIGO\",\"value\":\"15898.0\"},{\"name\":\"JourneySellKeyBLR_PNQ1\",\"value\":\"6E~ 806~ ~~BLR~05/12/2017 22:45~PNQ~05/13/2017 00:10~\"},{\"name\":\"tm-ignore-cacheExpiryTime\",\"value\":\"1494667307550\"},{\"name\":\"tm-ignore-cachePopulatedTime\",\"value\":\"1494580907550\"},{\"name\":\"tm-ignore_Rule-Number_BLR_PNQ\",\"value\":\"1057\"},{\"name\":\"tm-ignore_FareApplicationTypes_BLR_PNQ\",\"value\":\"Route\"},{\"name\":\"tm-ignore_LCC_VC_DOM\",\"value\":\"6E\"}]},\"pricing-info-index\":\"7\",\"index\":\"10\",\"booking-class\":\"Y\",\"segment-index\":\"10\",\"ticket-type\":\"E\",\"cabin-type\":\"E\"}},\"pax-type\":\"ADT\",\"pricing-info-list\":{\"pricing-info\":{\"fare-type\":\"Refundable\",\"fare-basis-code\":\"Y0IP\",\"index\":\"7\",\"fare-subtype\":true,\"fare-key\":\"supp_INDIGO|si-api-v2-8006236a-90fe-4070-8f68-c856d5446281|fk_retail_6E_806_1494609300000_Y0IP_true__fpr_15898\",\"pricing-elements\":{\"pricing-element\":[{\"amount\":\"14000.0\",\"category\":\"BF\"},{\"amount\":\"525.0\",\"category\":\"TAX\",\"code\":\"YQ\"},{\"amount\":\"150.0\",\"category\":\"TAX\",\"code\":\"PSF\"},{\"amount\":\"352.0\",\"category\":\"TAX\",\"code\":\"UDF\"},{\"amount\":\"58.0\",\"category\":\"TAX\",\"code\":\"AIRLINE-MSC\"},{\"amount\":\"813.0\",\"category\":\"TAX\",\"code\":\"JN\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"YR\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"CUTE\"},{\"amount\":\"0.0\",\"category\":\"TAX\",\"code\":\"OCT\"}]}}}}]",
+      "arrive_city_code": "PNQ",
+      "depart_city_code": "BLR",
+      "departure_time": "22:45:00",
+      "trip_type": "onward",
+      "segment_id": "BLR_PNQ",
+      "segment": "BLR_PNQ",
+      "direction_type": "O",
+      "price": "INR 15898",
+      "type": "Air",
+      "total_fare": "15898",
+      "trip_code": "I",
+      "direction": [
+        {
+          "segment_id": "BLR_PNQ",
+          "type": "Air",
+          "segment": "BLR_PNQ",
+          "stops": "0",
+          "duration": "1h 25m",
+          "leg": [
+            {
+              "org_depart_date": "2017-05-12",
+              "duration": "1h 25m",
+              "no_of_stops": "",
+              "departure_time": "22:45",
+              "departure_date": "Fri, 12 May 2017",
+              "flight_name": "IndiGo",
+              "source_city_code": "BLR",
+              "flight_code": "6E",
+              "flight_image": "./images/flight-images/6E.png",
+              "org_arrival_date": "2017-05-13",
+              "segment": "BLR_PNQ",
+              "flight_number": "806",
+              "type": "Leg",
+              "destination_city_code": "PNQ",
+              "arrival_time": "00:10",
+              "arrival_date": "Sat, 13 May 2017"
+            }
+          ]
+        }
+      ],
+      "fareDetails": [
+        {
+          "type": "FareDetails",
+          "total": "INR 15898",
+          "surcharges": [
+            {
+              "type": "Surcharges",
+              "total": "INR 1898.0"
+            }
+          ],
+          "BaseFare": [
+            {
+              "type": "BaseFare",
+              "total": "INR 14000.0"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "config": {}
+}

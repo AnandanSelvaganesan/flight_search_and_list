@@ -1,0 +1,894 @@
+[
+  {
+    "city_id": "1173",
+    "city_formatted_address": "Bangalore (BLR)"
+  },
+  {
+    "city_id": "100374",
+    "city_formatted_address": "Banda del Rio Sali ()"
+  },
+  {
+    "city_id": "100375",
+    "city_formatted_address": "Banfield ()"
+  },
+  {
+    "city_id": "102340",
+    "city_formatted_address": "Bandiana ()"
+  },
+  {
+    "city_id": "102341",
+    "city_formatted_address": "Bangalow ()"
+  },
+  {
+    "city_id": "102342",
+    "city_formatted_address": "Bangholme ()"
+  },
+  {
+    "city_id": "102343",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "102344",
+    "city_formatted_address": "Baniyala (BYX)"
+  },
+  {
+    "city_id": "102345",
+    "city_formatted_address": "Banksmeadow ()"
+  },
+  {
+    "city_id": "102346",
+    "city_formatted_address": "Bankstown (BWU)"
+  },
+  {
+    "city_id": "102347",
+    "city_formatted_address": "Bannockburn ()"
+  },
+  {
+    "city_id": "102348",
+    "city_formatted_address": "Banyo ()"
+  },
+  {
+    "city_id": "104703",
+    "city_formatted_address": "Banja Luka (BNX)"
+  },
+  {
+    "city_id": "104931",
+    "city_formatted_address": "Bande ()"
+  },
+  {
+    "city_id": "104932",
+    "city_formatted_address": "Banneux ()"
+  },
+  {
+    "city_id": "106638",
+    "city_formatted_address": "Banfora (BNR)"
+  },
+  {
+    "city_id": "106690",
+    "city_formatted_address": "Banevo ()"
+  },
+  {
+    "city_id": "106691",
+    "city_formatted_address": "Banite ()"
+  },
+  {
+    "city_id": "106692",
+    "city_formatted_address": "Bankya ()"
+  },
+  {
+    "city_id": "106693",
+    "city_formatted_address": "Bankya ()"
+  },
+  {
+    "city_id": "106694",
+    "city_formatted_address": "Bansko ()"
+  },
+  {
+    "city_id": "107040",
+    "city_formatted_address": "Bandar Seri Begawan (BWN)"
+  },
+  {
+    "city_id": "107297",
+    "city_formatted_address": "Bananal ()"
+  },
+  {
+    "city_id": "107298",
+    "city_formatted_address": "Bandeirantes ()"
+  },
+  {
+    "city_id": "109768",
+    "city_formatted_address": "Bancroft ()"
+  },
+  {
+    "city_id": "109769",
+    "city_formatted_address": "Banff (YBA)"
+  },
+  {
+    "city_id": "109770",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "109771",
+    "city_formatted_address": "Bantry ()"
+  },
+  {
+    "city_id": "112610",
+    "city_formatted_address": "Banana ()"
+  },
+  {
+    "city_id": "112611",
+    "city_formatted_address": "Bandundu (FDU)"
+  },
+  {
+    "city_id": "112613",
+    "city_formatted_address": "Basongo (BAN)"
+  },
+  {
+    "city_id": "112691",
+    "city_formatted_address": "Bangassou (BGU)"
+  },
+  {
+    "city_id": "112692",
+    "city_formatted_address": "Bangui (BGF)"
+  },
+  {
+    "city_id": "112836",
+    "city_formatted_address": "Bannwil ()"
+  },
+  {
+    "city_id": "114698",
+    "city_formatted_address": "Bangda (BPX)"
+  },
+  {
+    "city_id": "116887",
+    "city_formatted_address": "Banes ()"
+  },
+  {
+    "city_id": "117052",
+    "city_formatted_address": "Banov ()"
+  },
+  {
+    "city_id": "119258",
+    "city_formatted_address": "Bandau ()"
+  },
+  {
+    "city_id": "119259",
+    "city_formatted_address": "Bandekow bei Lubtheen ()"
+  },
+  {
+    "city_id": "119261",
+    "city_formatted_address": "Bandelin ()"
+  },
+  {
+    "city_id": "119262",
+    "city_formatted_address": "Bandenitz ()"
+  },
+  {
+    "city_id": "119263",
+    "city_formatted_address": "Bandow ()"
+  },
+  {
+    "city_id": "119264",
+    "city_formatted_address": "Bannberscheid ()"
+  },
+  {
+    "city_id": "119265",
+    "city_formatted_address": "Bannesdorf ()"
+  },
+  {
+    "city_id": "119266",
+    "city_formatted_address": "Bannewitz ()"
+  },
+  {
+    "city_id": "119267",
+    "city_formatted_address": "Banteln ()"
+  },
+  {
+    "city_id": "119268",
+    "city_formatted_address": "Bantikow ()"
+  },
+  {
+    "city_id": "119269",
+    "city_formatted_address": "Bantin ()"
+  },
+  {
+    "city_id": "119270",
+    "city_formatted_address": "Banzendorf ()"
+  },
+  {
+    "city_id": "119271",
+    "city_formatted_address": "Banzin ()"
+  },
+  {
+    "city_id": "119272",
+    "city_formatted_address": "Banzkow ()"
+  },
+  {
+    "city_id": "127657",
+    "city_formatted_address": "Bandholm ()"
+  },
+  {
+    "city_id": "128344",
+    "city_formatted_address": "Bani ()"
+  },
+  {
+    "city_id": "128575",
+    "city_formatted_address": "Banos ()"
+  },
+  {
+    "city_id": "129677",
+    "city_formatted_address": "Bandeira ()"
+  },
+  {
+    "city_id": "129678",
+    "city_formatted_address": "Baneres ()"
+  },
+  {
+    "city_id": "129679",
+    "city_formatted_address": "Banos de Ebro ()"
+  },
+  {
+    "city_id": "129680",
+    "city_formatted_address": "Banos de Rio Tobia ()"
+  },
+  {
+    "city_id": "129681",
+    "city_formatted_address": "Banos de Rioja ()"
+  },
+  {
+    "city_id": "129682",
+    "city_formatted_address": "Banos Rio Tobia ()"
+  },
+  {
+    "city_id": "129683",
+    "city_formatted_address": "Banos y Mendigo ()"
+  },
+  {
+    "city_id": "129684",
+    "city_formatted_address": "Banyeres del Penedes ()"
+  },
+  {
+    "city_id": "129685",
+    "city_formatted_address": "Banyoles ()"
+  },
+  {
+    "city_id": "135196",
+    "city_formatted_address": "Banassac ()"
+  },
+  {
+    "city_id": "135197",
+    "city_formatted_address": "Bancourt ()"
+  },
+  {
+    "city_id": "135198",
+    "city_formatted_address": "Ban-de-Laveline ()"
+  },
+  {
+    "city_id": "135199",
+    "city_formatted_address": "Bandol ()"
+  },
+  {
+    "city_id": "135200",
+    "city_formatted_address": "Baneuil ()"
+  },
+  {
+    "city_id": "135201",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "135202",
+    "city_formatted_address": "Bannalec ()"
+  },
+  {
+    "city_id": "135203",
+    "city_formatted_address": "Bannay ()"
+  },
+  {
+    "city_id": "135204",
+    "city_formatted_address": "Bannes ()"
+  },
+  {
+    "city_id": "135205",
+    "city_formatted_address": "Banneville-sur-Ajon ()"
+  },
+  {
+    "city_id": "135206",
+    "city_formatted_address": "Bannost-Villegagnon ()"
+  },
+  {
+    "city_id": "135207",
+    "city_formatted_address": "Banteux ()"
+  },
+  {
+    "city_id": "135208",
+    "city_formatted_address": "Bantouzelle ()"
+  },
+  {
+    "city_id": "135209",
+    "city_formatted_address": "Bantzenheim ()"
+  },
+  {
+    "city_id": "135210",
+    "city_formatted_address": "Banvillars ()"
+  },
+  {
+    "city_id": "135211",
+    "city_formatted_address": "Banyuls-sur-Mer (XBU)"
+  },
+  {
+    "city_id": "148350",
+    "city_formatted_address": "Banbridge ()"
+  },
+  {
+    "city_id": "148351",
+    "city_formatted_address": "Banbury ()"
+  },
+  {
+    "city_id": "148352",
+    "city_formatted_address": "Banchory ()"
+  },
+  {
+    "city_id": "148353",
+    "city_formatted_address": "Banchory - Devenick ()"
+  },
+  {
+    "city_id": "148354",
+    "city_formatted_address": "Banff ()"
+  },
+  {
+    "city_id": "148355",
+    "city_formatted_address": "Banff Offshore ()"
+  },
+  {
+    "city_id": "148356",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "148357",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "148358",
+    "city_formatted_address": "Bangor-is-y-coed ()"
+  },
+  {
+    "city_id": "148359",
+    "city_formatted_address": "Bankfoot ()"
+  },
+  {
+    "city_id": "148360",
+    "city_formatted_address": "Banks ()"
+  },
+  {
+    "city_id": "148361",
+    "city_formatted_address": "Bannockburn ()"
+  },
+  {
+    "city_id": "148362",
+    "city_formatted_address": "Banstead ()"
+  },
+  {
+    "city_id": "153924",
+    "city_formatted_address": "Banjul (BJL)"
+  },
+  {
+    "city_id": "153925",
+    "city_formatted_address": "Bansang ()"
+  },
+  {
+    "city_id": "155574",
+    "city_formatted_address": "Bank ()"
+  },
+  {
+    "city_id": "155575",
+    "city_formatted_address": "Banreve ()"
+  },
+  {
+    "city_id": "156259",
+    "city_formatted_address": "Banaina (NAF)"
+  },
+  {
+    "city_id": "156260",
+    "city_formatted_address": "Banda Aceh (BTJ)"
+  },
+  {
+    "city_id": "156261",
+    "city_formatted_address": "Bandanaira (NDA)"
+  },
+  {
+    "city_id": "156262",
+    "city_formatted_address": "Bandar Lampung (TKG)"
+  },
+  {
+    "city_id": "156263",
+    "city_formatted_address": "Bandengan ()"
+  },
+  {
+    "city_id": "156264",
+    "city_formatted_address": "Bandung, Java (BDO)"
+  },
+  {
+    "city_id": "156265",
+    "city_formatted_address": "Banggai ()"
+  },
+  {
+    "city_id": "156266",
+    "city_formatted_address": "Banjaran ()"
+  },
+  {
+    "city_id": "156267",
+    "city_formatted_address": "Banjarbaru ()"
+  },
+  {
+    "city_id": "156268",
+    "city_formatted_address": "Banjarmasin (BDJ)"
+  },
+  {
+    "city_id": "156269",
+    "city_formatted_address": "Banjarnegara ()"
+  },
+  {
+    "city_id": "156270",
+    "city_formatted_address": "Banjuwangi, Java ()"
+  },
+  {
+    "city_id": "156271",
+    "city_formatted_address": "Banten ()"
+  },
+  {
+    "city_id": "156272",
+    "city_formatted_address": "Bantul ()"
+  },
+  {
+    "city_id": "156273",
+    "city_formatted_address": "Bantul ()"
+  },
+  {
+    "city_id": "156274",
+    "city_formatted_address": "Banyumas ()"
+  },
+  {
+    "city_id": "156275",
+    "city_formatted_address": "Banyuwangi ()"
+  },
+  {
+    "city_id": "157008",
+    "city_formatted_address": "Banagher ()"
+  },
+  {
+    "city_id": "157009",
+    "city_formatted_address": "Bandon ()"
+  },
+  {
+    "city_id": "157010",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "157011",
+    "city_formatted_address": "Bangor Erris ()"
+  },
+  {
+    "city_id": "157012",
+    "city_formatted_address": "Bantry (BYT)"
+  },
+  {
+    "city_id": "157013",
+    "city_formatted_address": "Bantry Harbour ()"
+  },
+  {
+    "city_id": "157907",
+    "city_formatted_address": "Banbasa ()"
+  },
+  {
+    "city_id": "157908",
+    "city_formatted_address": "Banddar ()"
+  },
+  {
+    "city_id": "157909",
+    "city_formatted_address": "Bangarapet ()"
+  },
+  {
+    "city_id": "157910",
+    "city_formatted_address": "Bankot ()"
+  },
+  {
+    "city_id": "157911",
+    "city_formatted_address": "Bankura ()"
+  },
+  {
+    "city_id": "157912",
+    "city_formatted_address": "Banswara ()"
+  },
+  {
+    "city_id": "158357",
+    "city_formatted_address": "Bantala ()"
+  },
+  {
+    "city_id": "158968",
+    "city_formatted_address": "Bandar Amirabad ()"
+  },
+  {
+    "city_id": "158969",
+    "city_formatted_address": "Bandar Assaluyeh ()"
+  },
+  {
+    "city_id": "158970",
+    "city_formatted_address": "Bandar Khomeini (QBR)"
+  },
+  {
+    "city_id": "158971",
+    "city_formatted_address": "Bandar Mashur ()"
+  },
+  {
+    "city_id": "158972",
+    "city_formatted_address": "Bandar Neka ()"
+  },
+  {
+    "city_id": "158973",
+    "city_formatted_address": "Bandar Shahid Rajaee ()"
+  },
+  {
+    "city_id": "158974",
+    "city_formatted_address": "Bandar-e Anzali ()"
+  },
+  {
+    "city_id": "158975",
+    "city_formatted_address": "Bandar-e Emam Khomeyni ()"
+  },
+  {
+    "city_id": "158976",
+    "city_formatted_address": "Bandar-e Gaz ()"
+  },
+  {
+    "city_id": "158977",
+    "city_formatted_address": "Bandar-e Lengeh (BDH)"
+  },
+  {
+    "city_id": "158978",
+    "city_formatted_address": "Bandar-e Mah Shahr (MRX)"
+  },
+  {
+    "city_id": "158979",
+    "city_formatted_address": "Baneh ()"
+  },
+  {
+    "city_id": "159530",
+    "city_formatted_address": "Bando ()"
+  },
+  {
+    "city_id": "159531",
+    "city_formatted_address": "Banyoles ()"
+  },
+  {
+    "city_id": "164922",
+    "city_formatted_address": "Bandai, Fukushima ()"
+  },
+  {
+    "city_id": "164923",
+    "city_formatted_address": "Bando, Ibaraki ()"
+  },
+  {
+    "city_id": "167252",
+    "city_formatted_address": "Ban Houaynamleuk ()"
+  },
+  {
+    "city_id": "167253",
+    "city_formatted_address": "Ban Houei (OUI)"
+  },
+  {
+    "city_id": "167254",
+    "city_formatted_address": "Ban Thanaleng ()"
+  },
+  {
+    "city_id": "167368",
+    "city_formatted_address": "Bandaragama ()"
+  },
+  {
+    "city_id": "168036",
+    "city_formatted_address": "Bani Walid ()"
+  },
+  {
+    "city_id": "168866",
+    "city_formatted_address": "Banamichi ()"
+  },
+  {
+    "city_id": "169643",
+    "city_formatted_address": "Bandar Baru Bangi ()"
+  },
+  {
+    "city_id": "169644",
+    "city_formatted_address": "Bandar Baru Selayang ()"
+  },
+  {
+    "city_id": "169645",
+    "city_formatted_address": "Bandar Enstek ()"
+  },
+  {
+    "city_id": "169646",
+    "city_formatted_address": "Bandar Maharani ()"
+  },
+  {
+    "city_id": "169647",
+    "city_formatted_address": "Bandar Sri Damansara ()"
+  },
+  {
+    "city_id": "169648",
+    "city_formatted_address": "Bandar Tenggara ()"
+  },
+  {
+    "city_id": "169649",
+    "city_formatted_address": "Bandau, Sabah ()"
+  },
+  {
+    "city_id": "169650",
+    "city_formatted_address": "Bangau ()"
+  },
+  {
+    "city_id": "169651",
+    "city_formatted_address": "Bangi ()"
+  },
+  {
+    "city_id": "169652",
+    "city_formatted_address": "Banting ()"
+  },
+  {
+    "city_id": "170432",
+    "city_formatted_address": "Bant ()"
+  },
+  {
+    "city_id": "173322",
+    "city_formatted_address": "Bannockburn ()"
+  },
+  {
+    "city_id": "174012",
+    "city_formatted_address": "Banz (BNZ)"
+  },
+  {
+    "city_id": "174456",
+    "city_formatted_address": "Bangkal ()"
+  },
+  {
+    "city_id": "174457",
+    "city_formatted_address": "Bangui ()"
+  },
+  {
+    "city_id": "174809",
+    "city_formatted_address": "Bannu (BNP)"
+  },
+  {
+    "city_id": "175014",
+    "city_formatted_address": "Banino ()"
+  },
+  {
+    "city_id": "175015",
+    "city_formatted_address": "Baniocha ()"
+  },
+  {
+    "city_id": "176874",
+    "city_formatted_address": "Banatica ()"
+  },
+  {
+    "city_id": "176875",
+    "city_formatted_address": "Banho e Carvalhosa ()"
+  },
+  {
+    "city_id": "177814",
+    "city_formatted_address": "Banesti ()"
+  },
+  {
+    "city_id": "178375",
+    "city_formatted_address": "Banatski Karlovac ()"
+  },
+  {
+    "city_id": "178376",
+    "city_formatted_address": "Banatsko Karadjordjevo ()"
+  },
+  {
+    "city_id": "179629",
+    "city_formatted_address": "Bankeryd ()"
+  },
+  {
+    "city_id": "181154",
+    "city_formatted_address": "Banovce nad Bebravou ()"
+  },
+  {
+    "city_id": "181155",
+    "city_formatted_address": "Banska Bystrica (BBY)"
+  },
+  {
+    "city_id": "181156",
+    "city_formatted_address": "Banska Stiavnica ()"
+  },
+  {
+    "city_id": "181878",
+    "city_formatted_address": "Banghazi ()"
+  },
+  {
+    "city_id": "181879",
+    "city_formatted_address": "Baniyas ()"
+  },
+  {
+    "city_id": "181921",
+    "city_formatted_address": "Banda ()"
+  },
+  {
+    "city_id": "181963",
+    "city_formatted_address": "Ban Kantang ()"
+  },
+  {
+    "city_id": "181964",
+    "city_formatted_address": "Ban Khai ()"
+  },
+  {
+    "city_id": "181965",
+    "city_formatted_address": "Ban Mak Khaen (BAO)"
+  },
+  {
+    "city_id": "181966",
+    "city_formatted_address": "Ban Map Ta Phut ()"
+  },
+  {
+    "city_id": "181967",
+    "city_formatted_address": "Ban Pong ()"
+  },
+  {
+    "city_id": "181968",
+    "city_formatted_address": "Ban Prakop Customs House ()"
+  },
+  {
+    "city_id": "181969",
+    "city_formatted_address": "Ban Talat Takua Pa ()"
+  },
+  {
+    "city_id": "181970",
+    "city_formatted_address": "Bandon ()"
+  },
+  {
+    "city_id": "181971",
+    "city_formatted_address": "Bang Kapi ()"
+  },
+  {
+    "city_id": "181972",
+    "city_formatted_address": "Bang Khen ()"
+  },
+  {
+    "city_id": "181973",
+    "city_formatted_address": "Bang Nam Prieo ()"
+  },
+  {
+    "city_id": "181974",
+    "city_formatted_address": "Bang Phli ()"
+  },
+  {
+    "city_id": "181975",
+    "city_formatted_address": "Bang Rak ()"
+  },
+  {
+    "city_id": "181976",
+    "city_formatted_address": "Bang Saphan ()"
+  },
+  {
+    "city_id": "181977",
+    "city_formatted_address": "Bangkok (BKK)"
+  },
+  {
+    "city_id": "181978",
+    "city_formatted_address": "Bangkok ()"
+  },
+  {
+    "city_id": "181979",
+    "city_formatted_address": "Bangnara ()"
+  },
+  {
+    "city_id": "181980",
+    "city_formatted_address": "Bangpakong ()"
+  },
+  {
+    "city_id": "181981",
+    "city_formatted_address": "Bangpakong Terminal ()"
+  },
+  {
+    "city_id": "181982",
+    "city_formatted_address": "Bangpoomai ()"
+  },
+  {
+    "city_id": "181983",
+    "city_formatted_address": "Bangsu ()"
+  },
+  {
+    "city_id": "181984",
+    "city_formatted_address": "Banlaem ()"
+  },
+  {
+    "city_id": "182431",
+    "city_formatted_address": "Banaz ()"
+  },
+  {
+    "city_id": "182432",
+    "city_formatted_address": "Bandirma (BDM)"
+  },
+  {
+    "city_id": "184480",
+    "city_formatted_address": "Bancroft ()"
+  },
+  {
+    "city_id": "184481",
+    "city_formatted_address": "Bancroft ()"
+  },
+  {
+    "city_id": "184482",
+    "city_formatted_address": "Bancroft ()"
+  },
+  {
+    "city_id": "184483",
+    "city_formatted_address": "Bancroft ()"
+  },
+  {
+    "city_id": "184484",
+    "city_formatted_address": "Bandera ()"
+  },
+  {
+    "city_id": "184485",
+    "city_formatted_address": "Bandon (BDY)"
+  },
+  {
+    "city_id": "184486",
+    "city_formatted_address": "Bangor (BGR)"
+  },
+  {
+    "city_id": "184487",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "184488",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "184489",
+    "city_formatted_address": "Bangor ()"
+  },
+  {
+    "city_id": "184490",
+    "city_formatted_address": "Banks ()"
+  },
+  {
+    "city_id": "184491",
+    "city_formatted_address": "Banner Elk ()"
+  },
+  {
+    "city_id": "184492",
+    "city_formatted_address": "Banning (BNG)"
+  },
+  {
+    "city_id": "184493",
+    "city_formatted_address": "Bannister ()"
+  },
+  {
+    "city_id": "184494",
+    "city_formatted_address": "Bannockburn ()"
+  },
+  {
+    "city_id": "184495",
+    "city_formatted_address": "Bantam ()"
+  },
+  {
+    "city_id": "203534",
+    "city_formatted_address": "Banmethuot (BMV)"
+  },
+  {
+    "city_id": "203899",
+    "city_formatted_address": "Bandele ()"
+  },
+  {
+    "city_id": "203900",
+    "city_formatted_address": "Bandrele ()"
+  },
+  {
+    "city_id": "205192",
+    "city_formatted_address": "Bandra ()"
+  },
+  {
+    "city_id": "205343",
+    "city_formatted_address": "Bandar Abbas (BND)"
+  }
+]

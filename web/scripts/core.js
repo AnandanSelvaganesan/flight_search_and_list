@@ -1060,7 +1060,8 @@ function loadAllExistingTrips(segmentObjects, serviceCode){
 		queryObj['service_code'] = serviceCode;
 		var query = JSON.stringify(queryObj);
 		$.ajax({
-			url:"rest/trip/existingTrips?query=" + encodeURIComponent(query) + "&timeStamp=" + new Date().getTime(),
+			//url:"rest/trip/existingTrips?query=" + encodeURIComponent(query) + "&timeStamp=" + new Date().getTime(),
+			url:"existingTrips.json",
 			success:function(result){
 			   		
 				var resultData = JSON.parse(result); 

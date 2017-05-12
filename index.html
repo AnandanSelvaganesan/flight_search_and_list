@@ -56,7 +56,7 @@
 			src="web/scripts/currency_dropdown.js?v=<%=applicationVersion%>"></script>
 	<script type="text/javascript"
 			src="web/scripts/currencyUtils.js?v=<%=applicationVersion%>"></script>
-
+	<script type="text/javascript" src="web/scripts/main.js?v=<%=applicationVersion%>"></script>
 
 <!--	<%
 	String requestId = (String) request.getAttribute("requestId");
@@ -99,6 +99,23 @@
 </style>
 
 	<script type="text/javascript">
+
+	loggedInTeamId = "null";
+	if(_isLanguageDropDown)
+		_isLanguageDropDown="N";														 /* for language translator */
+	else
+		var _isLanguageDropDown = "N";
+
+	var _primaryUserRole = "null";
+	var _primaryUserDesignation = "End User";
+	var _userLabel = "End User";
+	var _primaryUserLabel = "End User";
+
+	var _user_type = "U";
+	var _corpId ="267";
+	var _isBGImageIsEnabled = "N";
+	var _logged_user_details;
+
 
 	var nextPriceSortOrder = "ASC";
 	var nextAirLineSortOrder = "ASC";
@@ -621,7 +638,8 @@ function init(){
 		        }, false);
 		        return xhr;
 		    },
-		url:"web/jsp/GetProviders.jsp?type=air",
+		    url:"GetProviders.json?type=air",
+		//url:"web/jsp/GetProviders.jsp?type=air",
 		success:function(result){
 
 		var providers = result['providers'];
@@ -665,7 +683,8 @@ function getOnwardSegmentObject(id){
 	segmentObject['depart_date'] = getDateFromFormat(document.getElementById("date_txt_" + id ).value);
 	segmentObject['depart_city_code'] = departureCity;
 	segmentObject['arrive_city_code'] = arrivalCity;
-	segmentObject['segment'] = departureCity + "_" + arrivalCity;
+	//segmentObject['segment'] = departureCity + "_" + arrivalCity;
+	segmentObject['segment'] = "BLR_PNQ";
 	segmentObject['class_type'] = classType;
 
 	return segmentObject;
@@ -741,7 +760,8 @@ function getSegmentSearchObjects(){
 
 		var departureCity = segmentObject['depart_city_code'];
 		var arrivalCity = segmentObject['arrive_city_code'];
-		var segmentName = departureCity + "_" + arrivalCity;
+		var segmentName = "BLR_PNQ";
+		//var segmentName = departureCity + "_" + arrivalCity;
 
 		createSegmentHeader(segmentName);
 
@@ -891,7 +911,7 @@ function getContent(providerId){
 	segmentObjects = getSegmentSearchObjects();
 	var searchString = JSON.stringify(segmentObjects);
 
-	$.ajax({url:"web/jsp/Search.jsp?providerId=" + providerId + "&searchData=" + encodeURIComponent(searchString)
+	$.ajax({url:"Search.json?providerId=" + providerId + "&searchData=" + encodeURIComponent(searchString)
 			+ "&flightType=" + gv_FlightType,success:function(result){
 
 
@@ -953,7 +973,7 @@ function getContent(providerId){
 		}
 	});
 
-	loadAllExistingTrips(segmentObjects, "AIR");
+	//loadAllExistingTrips(segmentObjects, "AIR");
 
 }
 function refreshRenderEntity(){
@@ -4449,7 +4469,9 @@ $(document).ready(function(){
 
 	//for autostoring iata code
 	function getFlightIata(city){
-		var reqURL = "rest/cities/autoCompleteIATA?q=";
+
+		var reqURL = "autoCompleteIATA.json?q=";
+		//var reqURL = "rest/cities/autoCompleteIATA?q=";
 		var result = $("#id").val();
 		var iataCode = "";
 
@@ -4508,7 +4530,8 @@ $(document).ready(function(){
 
 	function loadAvgTicketAvailability(){
 
-		var reqURL = "rest/notifications/getAvgTicketPrice";
+		var reqURL = "getAvgTicketPrice.json";
+		//var reqURL = "rest/notifications/getAvgTicketPrice";
 		var paramObj = {};
 		paramObj['corpId'] = _corpId;
 		var fromCityId = parseInt(document.getElementById("city_from_txt_hidden_0").value);
@@ -4610,7 +4633,34 @@ $(document).ready(function(){
 	});
 
 
+ $.widget( "ui.dialog", $.ui.dialog, {
+		open: function() {
+			$(this.uiDialogTitlebarClose).attr("class","ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close");
+			$(this.uiDialogTitlebarClose).html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+			// Invoke the parent widget's open().
+			return this._super();
+		}
+	});
 
+$.widget.bridge('uitooltip', $.ui.tooltip);
+
+$(function() {
+	'use strict';
+    $(document).uitooltip({
+      position: {
+        my: "center bottom-10",
+        at: "center top",
+        using: function( position, feedback ) {
+            $( this ).css( position );
+            $( "<div>" )
+              .addClass( "uiarrow" )
+              .addClass( feedback.vertical )
+              .addClass( feedback.horizontal )
+              .appendTo( this );
+          }
+      }
+    });
+ });
 </script>
 
 </body>

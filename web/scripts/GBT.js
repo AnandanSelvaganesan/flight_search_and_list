@@ -34,8 +34,9 @@ function buildEmptySearchBox(){
 
 //function to Generate 1st header row of Oneway and roundtrip Search
 function attachCityAutoComplete(txtField, txHiddenField){
-	
-	var cityReqURL = "rest/cities/autoCompleteIATA?q=";
+
+	var cityReqURL = "autoCompleteIATA.json?q=";
+	//var cityReqURL = "rest/cities/autoCompleteIATA?q=";
 	
 	jQuery(txtField).autocomplete({
         source: function (request, response) {
