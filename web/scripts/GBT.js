@@ -455,8 +455,9 @@ function addSearchSegmentRow(){
 	var rightIconAddon = document.createElement('span');
 	$(rightIconAddon).attr('class','glyphicon glyphicon-triangle-bottom form-control-icon font10 color-default');
 	$(rightIconAddon).html('');
-	
-	
+
+    dropDownForm.addEventListener("click",function(e) { e.stopPropagation();});
+
 	formGroupDiv.appendChild(label);
 	formGroupDiv.appendChild(inputTravellers);
 	formGroupDiv.appendChild(dropDownForm);
@@ -515,10 +516,7 @@ function addSearchSegmentRow(){
 	
 	//$('.dropdown-toggle').dropdown();
 
-	/*$('.input-dropdown').click(function(e) {
-	    e.stopPropagation();
-	});*/
-	
+
 	
 
 }
@@ -1090,8 +1088,9 @@ function addCitySegmentRow(){
 	var rightIconAddon = document.createElement('span');
 	$(rightIconAddon).attr('class','glyphicon glyphicon-triangle-bottom form-control-icon font10 color-default');
 	$(rightIconAddon).html('');
-	
-	
+
+	dropDownForm.addEventListener("click",function(e) { e.stopPropagation();});
+
 	formGroupDiv.appendChild(label);
 	formGroupDiv.appendChild(inputTravellers);
 	formGroupDiv.appendChild(dropDownForm);
@@ -1142,10 +1141,7 @@ function addCitySegmentRow(){
 	
 	
 	AddCitytableElement.appendChild(rowElementAddCity);
-	
-	/*$('.input-dropdown').click(function(e) {
-		    e.stopPropagation();
-	});*/
+
 	
 }
 

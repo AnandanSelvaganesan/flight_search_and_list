@@ -910,8 +910,16 @@ function getContent(providerId){
 
 	segmentObjects = getSegmentSearchObjects();
 	var searchString = JSON.stringify(segmentObjects);
+	var reqURL = "Search.json";
 
-	$.ajax({url:"Search.json?providerId=" + providerId + "&searchData=" + encodeURIComponent(searchString)
+	if(gv_FlightType == "one-way"){
+		reqURL = "Search.json";
+
+	}else if(gv_FlightType == "round-trip"){
+		reqURL = "round-trip_Search.json";
+	}
+
+	$.ajax({url:reqURL+"?providerId=" + providerId + "&searchData=" + encodeURIComponent(searchString)
 			+ "&flightType=" + gv_FlightType,success:function(result){
 
 
